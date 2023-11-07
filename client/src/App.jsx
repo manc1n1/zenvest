@@ -1,6 +1,6 @@
 import './App.css';
 import { Outlet } from 'react-router-dom';
-import { LoginProvider } from './utils/StudentContext';
+import { LoginProvider } from './utils/LoginContext';
 
 // Uncomment import statement below after building queries and mutations
 // import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
