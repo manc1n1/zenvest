@@ -7,7 +7,7 @@ import { getMatchup, createVote } from '../utils/api';
 // import { CREATE_VOTE } from '../utils/mutations';
 // import { QUERY_MATCHUPS } from '../utils/queries';
 
-const Vote = () => {
+const Login = () => {
 	const [matchup, setMatchup] = useState({});
 	let { id } = useParams();
 
@@ -74,4 +74,4 @@ const Vote = () => {
 	);
 };
 
-export default Vote;
+export default Login;
