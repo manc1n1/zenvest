@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useLoginContext, LoginProvider } from '../utils/LoginContext';
+
 
 
 function Navbar() {
+    // useNavigation hook to redirect to logged in after signing up 
     //const [nav, setNav] = useState(false);
     //const handleClick = () => setNav(!nav);
-    //const loggedIn = true;
+    //const { setLogin, login, loginUser, logoutUser } = useLoginContext();
 
-    // useNavigate 
+    const loggedIn = true;
 
 
     function logout() {
@@ -38,7 +41,7 @@ function Navbar() {
                     <Link to='login'>Login</Link>
                 </button>
                 :
-                <button onClick={() => logout()}>Logout</button>
+                <button onClick={() => logoutUser()}>Logout</button>
             }
             </li>
         </ul>
