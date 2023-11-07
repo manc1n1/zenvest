@@ -3,9 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
 import Home from './pages/Home';
-import Matchup from './pages/Matchup';
-import Vote from './pages/Vote';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import { StrictMode } from 'react';
+
 
 const router = createBrowserRouter([
 	{
@@ -18,17 +21,23 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: '/matchup',
-				element: <Matchup />,
+				path: 'login',
+				element: <Login />,
 			},
 			{
-				path: '/matchup/:id',
-				element: <Vote />,
+				path: 'profile',
+				element: <Profile />,
+			},
+			{
+				path: 'dashboard',
+				element: <Dashboard />,
 			},
 		],
 	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<RouterProvider router={router} />,
+	<StrictMode>
+		<RouterProvider router={router} />,
+	</StrictMode>
 );

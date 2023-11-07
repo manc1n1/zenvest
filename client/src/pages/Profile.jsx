@@ -7,7 +7,7 @@ import { getAllTech, createMatchup } from '../utils/api';
 // import { QUERY_TECH } from '../utils/queries';
 // import { CREATE_MATCHUP } from '../utils/mutations';
 
-const Matchup = () => {
+const Profile = () => {
 	const [techList, setTechList] = useState([]);
 	const [formData, setFormData] = useState({
 		tech1: 'JavaScript',
@@ -95,4 +95,4 @@ const Matchup = () => {
 	);
 };
 
-export default Matchup;
+export default Profile;
