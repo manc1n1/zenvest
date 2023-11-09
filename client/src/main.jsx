@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import { StrictMode } from 'react';
 
+import './index.css';
 
 const router = createBrowserRouter([
 	{
@@ -39,5 +40,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<StrictMode>
 		<RouterProvider router={router} />,
-	</StrictMode>
+	</StrictMode>,
 );
