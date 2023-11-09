@@ -8,12 +8,12 @@ import Navbar from '../components/Navbar';
 
 const Home = () => {
 	return (
-		<div className="card bg-white card-rounded w-50">
+		<div className="card bg-slate-500 card-rounded w-50">
 			<nav>
-			<Navbar/>
+				<Navbar />
 			</nav>
 			<div className="card-header bg-dark text-center">
-				<h1>ZenVest</h1>
+				<h1 className="text-2xl text-pink-950">ZenVest</h1>
 			</div>
 		</div>
 	);
