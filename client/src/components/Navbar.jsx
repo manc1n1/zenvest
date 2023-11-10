@@ -1,38 +1,42 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useLoginContext, LoginProvider } from '../utils/LoginContext';
+import { useLoginContext } from '../utils/LoginContext';
 
 function Navbar() {
 	// useNavigation hook to redirect to logged in after signing up
-	//const [nav, setNav] = useState(false);
-	//const handleClick = () => setNav(!nav);
-	//const { setLogin, login, loginUser, logoutUser } = useLoginContext();
+	const { login, logoutUser } = useLoginContext();
+	//const navigate = useNavigate();
 
-	const loggedIn = true;
+	// Redirect to the login page if the user is not logged in
+	// if (!login.loggedIn) {
+	// 	//navigate('/login');
+	// 	return null;
+	// }
 
-	function logout() {
-		console.log('logged out successfully');
-	}
+	//const loggedIn = true;
+
+	// function logout() {
+	// 	console.log('logged out successfully');
+	// }
 
 	return (
 		<div className="container">
 			<ul className="list-group">
 				<li>
-					<Link to="home">Home</Link>
+					<Link to="/">Home</Link>
 				</li>
 				<li>
-					<Link to="profile">Profile</Link>
+					{login.loggedIn ? <Link to="profile">Profile</Link> : ''}
 				</li>
 				<li>
-					{loggedIn ? <Link to="dashboard">My Dashboard</Link> : ''}
+					{login.loggedIn ? <Link to="dashboard">My Dashboard</Link> : ''}
 				</li>
 				<li>
-					{loggedIn ? (
-						<button>
-							<Link to="login">Login</Link>
-						</button>
-					) : (
+					{login.loggedIn ? (
 						<button onClick={() => logoutUser()}>Logout</button>
+					) : (
+						<button>
+						<Link to="login">Login</Link>
+						</button>
 					)}
 				</li>
 			</ul>

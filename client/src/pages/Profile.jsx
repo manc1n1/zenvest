@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllTech, createMatchup } from '../utils/api';
+//import { getAllTech, createMatchup } from '../utils/api';
 
 // Uncomment import statements below after building queries and mutations
 // import { useMutation, useQuery } from '@apollo/client';

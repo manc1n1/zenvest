@@ -11,68 +11,68 @@ export const useLoginContext = () => useContext(LoginContext);
 export const LoginProvider = ({ children }) => {
   const [login, setLogin] = useState( 
     {
-      loggedIn: false,
-      userId: ""
+      loggedIn: true,
+      userId: "",
     }
   );
 
-  // Function to login user -- calls backend 
-  // If login successful, toggle login to true, set userId
-  // Going to need a fetch request for the API
-  const loginUser = async (user) => {
-    // Check if the user exists
-    if (!user) {
-      return;
-    } else {
-        // Send a POST request to the API endpoint
-        const response = await fetch("/api/users/login", {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-            headers: { "Content-Type": "application/json" },
+  // Login User 
+  const loginUser = async (email, password) => {
+    try {
+      const response = await fetch("/api/users/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+
+        setLogin({
+          loggedIn: true,
+          userId: userData.userId, // Set the user ID from the response
         });
 
-        if (response.ok) {
-            // If successful, redirect the browser to dashboard
-            document.location.replace("/dashboard");
-        } else {
-            alert(response.statusText);
-        }
+        document.location.replace("/dashboard");
+      } else {
+        alert("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
-
-
-    // // Generate a unique id for this student
-    // const id = createId(students);
-    
-    // // We use the spread operator to fill in the details from the student object that was passed while adding the new `id`
-    // const newStudent = { ...student, id };
-    
-    // // Update state to logged in 
-    loggedin = true;
 
   };
   
-  // Function to logout user 
-  // If logout successful, toggle logout to false, set userId null 
+  // Logout User
   const logoutUser = async () => {
-  const response = await fetch('/api/users/logout', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  });
+    try {
+      const response = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-  if (response.ok) {
-    document.location.replace('/');
-    loggedin = false;
-  } else {
-    alert(response.statusText);
-  }
-};
+      if (response.ok) {
+        setLogin({
+          loggedIn: false,
+          userId: "",
+        });
+
+        document.location.replace('/');
+      } else {
+        alert("Logout failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
   
   // Provider components expect a value prop to be passed
   return (
-    <LoginContext.Provider value={{ setLogin, login, loginUser, logoutUser }}>
+    <LoginContext.Provider value={{ login, setLogin, loginUser, logoutUser }}>
       {/* Render children passed from props */}
       {children}
     </LoginContext.Provider>
   );
+
 };
   
