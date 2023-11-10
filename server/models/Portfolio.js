@@ -10,6 +10,6 @@ const portfolioSchema = new Schema({
 	],
 });
 
-const Portfolio = model('Portfolio', userSchema);
+const Portfolio = model('Portfolio', portfolioSchema);
 
 module.exports = Portfolio;
