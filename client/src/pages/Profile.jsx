@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLoginContext } from '../utils/LoginContext';
+import Navbar from '../components/Navbar';
 //import { getAllTech, createMatchup } from '../utils/api';
 
 // Uncomment import statements below after building queries and mutations
@@ -8,12 +10,15 @@ import { useNavigate } from 'react-router-dom';
 // import { CREATE_MATCHUP } from '../utils/mutations';
 
 const Profile = () => {
-	const [techList, setTechList] = useState([]);
-	const [formData, setFormData] = useState({
-		tech1: 'JavaScript',
-		tech2: 'JavaScript',
-	});
-	let navigate = useNavigate();
+    const { login } = useLoginContext();
+	const navigate = useNavigate();
+
+	// Redirect to the login page if the user is not logged in
+	if (!login.loggedIn) {
+		navigate('/login');
+		return null;
+	}
+    console.log("Dashboard loaded successfully")
 
 	useEffect(() => {
 		const getTechList = async () => {
@@ -61,12 +66,13 @@ const Profile = () => {
 
 	return (
 		<div className="card bg-white card-rounded w-25">
+				<Navbar />
 			<div className="card-header bg-dark text-center">
-				<h1>Let's create a matchup!</h1>
+				<h1>My Profile</h1>
 			</div>
 			<div className="card-body m-5">
-				<form onSubmit={handleFormSubmit}>
-					<label>Tech 1: </label>
+				{/* <form onSubmit={handleFormSubmit}>
+					<label>Name </label>
 					<select name="tech1" onChange={handleInputChange}>
 						{techList.map((tech) => {
 							return (
@@ -89,7 +95,7 @@ const Profile = () => {
 					<button className="btn btn-danger" type="submit">
 						Create Matchup!
 					</button>
-				</form>
+				</form> */}
 			</div>
 		</div>
 	);
