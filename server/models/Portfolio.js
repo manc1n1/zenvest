@@ -1,7 +1,16 @@
 const { Schema, model } = require('mongoose');
-const Investment = require('./Investment');
 
 const portfolioSchema = new Schema({
+	name: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	type: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 	investment: [
 		{
 			type: Schema.Types.ObjectId,
