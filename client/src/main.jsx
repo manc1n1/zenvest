@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
+import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
 import { StrictMode } from 'react';
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
 			{
 				path: 'dashboard',
 				element: <Dashboard />,
+			},
+			{
+				path: 'signup',
+				element: <Signup />,
 			},
 		],
 	},
