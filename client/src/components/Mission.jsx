@@ -12,7 +12,7 @@ function Mission() {
             {/* If already logged in, redirect to dashboard. If not logged in, redirect to sign up page. */}
             {login.loggedIn ? (
                 <button>
-                <Link to="login">Sign Up</Link>
+                <Link to="dashboard">Sign Up</Link>
                 </button>
                 ) : (
                 <button>
