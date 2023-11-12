@@ -10,7 +10,7 @@ export default function Nav({ links }) {
 						ZenVest
 					</h1>
 				</Link>
-				<div className="flex justify-between sm:space-x-10 text-xs sm:text-lg mt-3 sm:mt-0">
+				<div className="flex justify-end sm:justify-between space-x-5 sm:space-x-10 text-xs sm:text-lg mt-3 sm:mt-0">
 					{links.map((link) => link)}
 				</div>
 			</div>

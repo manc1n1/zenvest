@@ -23,20 +23,20 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: 'dashboard',
-				element: <Dashboard />,
-			},
-			{
-				path: 'profile',
-				element: <Profile />,
-			},
-			{
 				path: 'login',
 				element: <Login />,
 			},
 			{
 				path: 'signup',
 				element: <Signup />,
+			},
+			{
+				path: 'dashboard',
+				element: <Dashboard />,
+			},
+			{
+				path: 'profile',
+				element: <Profile />,
 			},
 		],
 	},

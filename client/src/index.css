@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	font-family: 'Josefin Slab', serif;
+}
+
 body {
 	background-image: url('./assets/images/background.jpeg');
 }
