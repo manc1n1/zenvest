@@ -12,7 +12,7 @@ function App() {
 		<>
 			<LoginProvider>
 				<Nav />
-				<main className="min-h-screen text-gray-600 dark:text-gray-300 pt-24 sm:pt-16">
+				<main className="min-h-screen pt-24 sm:pt-16">
 					<Outlet />
 				</main>
 				<Footer />

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import Auth from '../utils/auth';
 
 // Initialize new context for logged in
 const LoginContext = createContext();
@@ -14,7 +15,6 @@ export const LoginProvider = ({ children }) => {
 		userId: '',
 	});
 
-	// Login User
 	const loginUser = async (email, password) => {
 		try {
 			const response = await fetch('/api/user/login', {
@@ -35,12 +35,39 @@ export const LoginProvider = ({ children }) => {
 			} else {
 				alert('Login failed. Please check your credentials.');
 			}
-		} catch (error) {
-			console.error('Error during login:', error);
+		} catch (err) {
+			console.error('Error during login:', err);
 		}
 	};
 
-	// Logout User
+	const signUpUser = async (username, email, password) => {
+		try {
+			const response = await fetch('/api/user/signup', {
+				method: 'POST',
+				body: JSON.stringify({ username, email, password }),
+				headers: { 'Content-Type': 'application/json' },
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				console.log(data.token);
+
+				Auth.login(data.token);
+
+				setLogin({
+					loggedIn: true,
+					userId: '',
+				});
+			}
+			if (response.status === 400) {
+				alert('Email already exists.');
+			}
+		} catch (err) {
+			console.error('Error during sign up:', err);
+		}
+	};
+
 	const logoutUser = async () => {
 		try {
 			const response = await fetch('/api/user/logout', {
@@ -54,29 +81,12 @@ export const LoginProvider = ({ children }) => {
 					userId: '',
 				});
 
-				document.location.replace('/');
+				// document.location.replace('/');
 			} else {
 				alert('Logout failed. Please try again.');
 			}
-		} catch (error) {
-			console.error('Error during logout:', error);
-		}
-	};
-	const signUpUser = async (username, email, password) => {
-		try {
-			const response = await fetch('/api/user/signup', {
-				method: 'POST',
-				body: JSON.stringify({ username, email, password }),
-				headers: { 'Content-Type': 'application/json' },
-			});
-
-			if (response.ok) {
-				alert('Sign up successful. Please log in.');
-			} else {
-				alert('Sign up failed. Please try again.');
-			}
-		} catch (error) {
-			console.error('Error during sign up:', error);
+		} catch (err) {
+			console.error('Error during logout:', err);
 		}
 	};
 
