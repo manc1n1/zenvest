@@ -1,5 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Nav from './components/Navbar/Nav';
+import Footer from './components/Footer/Footer';
 import { LoginProvider } from './utils/LoginContext';
 
 // Uncomment import statement below after building queries and mutations
@@ -7,11 +9,15 @@ import { LoginProvider } from './utils/LoginContext';
 
 function App() {
 	return (
-		<div className="flex-column justify-center align-center min-100-vh bg-primary">
+		<>
 			<LoginProvider>
-				<Outlet />
+				<Nav />
+				<main className="min-h-screen text-gray-600 dark:text-gray-300 pt-24 sm:pt-16">
+					<Outlet />
+				</main>
+				<Footer />
 			</LoginProvider>
-		</div>
+		</>
 	);
 }
 
