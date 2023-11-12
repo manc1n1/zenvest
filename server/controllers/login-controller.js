@@ -4,14 +4,14 @@ const { signToken } = require('../utils/auth');
 module.exports = {
 	async login({ body }, res) {
 		const user = await User.findOne({
-			username: body.username,
+			email: body.email,
 		});
 
 		if (!user) {
 			res.status(404).json({ message: '404: User not found.' });
 		}
 
-		const correctPw = await user.isCorrectPassword(password);
+		const correctPw = await user.isCorrectPassword(body.password);
 
 		if (!correctPw) {
 			res.status(401).json({ message: '401: Unauthorized.' });
@@ -38,4 +38,6 @@ module.exports = {
 
 		res.status(200).json({ token, userInfo });
 	},
+
+	//logout
 };
