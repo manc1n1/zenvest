@@ -31,7 +31,7 @@ export const LoginProvider = ({ children }) => {
 					userId: userData.userId, // Set the user ID from the response
 				});
 
-				// document.location.replace('/dashboard');
+				// navigate('/dashboard');
 			} else {
 				alert('Login failed. Please check your credentials.');
 			}
