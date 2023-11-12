@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/github/license/manc1n1/zenvest.svg?style=for-the-badge)](https://github.com/manc1n1/zenvest/blob/master/LICENSE)
 [![nodejs][node.js]][nodejs-url]
 [![react][react]][react-url]
+[![mongodb][mongodb]][mongodb-url]
 [![vitejs][vite]][vite-url]
 [![tailwindcss][tailwindcss]][tailwindcss-url]
 
@@ -80,6 +81,8 @@ Don't forget to give the project a star! Thanks again!
 [nodejs-url]: https://nodejs.org/
 [react]: https://img.shields.io/badge/react-333?style=for-the-badge&logo=react
 [react-url]: https://react.dev/
+[mongodb]: https://img.shields.io/badge/mongodb-333?style=for-the-badge&logo=mongodb
+[mongodb-url]: https://www.mongodb.com/
 [vite]: https://img.shields.io/badge/vite-333?style=for-the-badge&logo=vite
 [vite-url]: https://vitejs.dev/
 [tailwindcss]: https://img.shields.io/badge/tailwindcss-333?style=for-the-badge&logo=tailwindcss
