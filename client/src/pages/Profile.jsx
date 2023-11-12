@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginContext } from '../utils/LoginContext';
-import Navbar from '../components/Navbar';
-//import { getAllTech, createMatchup } from '../utils/api';
 
 // Uncomment import statements below after building queries and mutations
 // import { useMutation, useQuery } from '@apollo/client';
@@ -10,7 +8,7 @@ import Navbar from '../components/Navbar';
 // import { CREATE_MATCHUP } from '../utils/mutations';
 
 const Profile = () => {
-    const { login } = useLoginContext();
+	const { login } = useLoginContext();
 	const navigate = useNavigate();
 
 	// Redirect to the login page if the user is not logged in
@@ -18,7 +16,7 @@ const Profile = () => {
 		navigate('/login');
 		return null;
 	}
-    console.log("Dashboard loaded successfully")
+	console.log('Dashboard loaded successfully');
 
 	useEffect(() => {
 		const getTechList = async () => {
@@ -66,7 +64,6 @@ const Profile = () => {
 
 	return (
 		<div className="card bg-white card-rounded w-25">
-				<Navbar />
 			<div className="card-header bg-dark text-center">
 				<h1>My Profile</h1>
 			</div>
