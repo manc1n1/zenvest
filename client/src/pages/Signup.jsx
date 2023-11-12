@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { useLoginContext } from '../utils/LoginContext';
 
-const Signup = () => {
-  const { setLogin, loginUser } = useLoginContext();
+const SignUp = () => {
+  const { signUpUser } = useLoginContext();
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    await loginUser(email, password);
+  const handleSignUp = async () => {
+    await signUpUser( username, email, password);
   };
 
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
       <input
         type="email"
         placeholder="Email"
@@ -24,9 +31,9 @@ const Signup = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Create Account</button>
+      <button onClick={handleSignUp}>Create Account</button>
     </div>
   );
 };
 
-export default Signup;
+export default SignUp;
