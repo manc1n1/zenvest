@@ -61,12 +61,29 @@ export const LoginProvider = ({ children }) => {
 		} catch (error) {
 			console.error('Error during logout:', error);
 		}
+  };
+  const signUpUser = async (username, email, password) => {
+		try {
+			const response = await fetch('/api/users/signup', {
+				method: 'POST',
+				body: JSON.stringify({ username, email, password }),
+				headers: { 'Content-Type': 'application/json' },
+			});
+
+			if (response.ok) {
+				alert('Sign up successful. Please log in.');
+			} else {
+				alert('Sign up failed. Please try again.');
+			}
+		} catch (error) {
+			console.error('Error during sign up:', error);
+		}
 	};
 
 	// Provider components expect a value prop to be passed
 	return (
 		<LoginContext.Provider
-			value={{ login, setLogin, loginUser, logoutUser }}
+			value={{ login, setLogin, loginUser, logoutUser, signUpUser }}
 		>
 			{/* Render children passed from props */}
 			{children}
