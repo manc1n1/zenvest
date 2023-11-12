@@ -17,7 +17,7 @@ export const LoginProvider = ({ children }) => {
 	// Login User
 	const loginUser = async (email, password) => {
 		try {
-			const response = await fetch('/api/users/login', {
+			const response = await fetch('/api/user/login', {
 				method: 'POST',
 				body: JSON.stringify({ email, password }),
 				headers: { 'Content-Type': 'application/json' },
@@ -31,7 +31,7 @@ export const LoginProvider = ({ children }) => {
 					userId: userData.userId, // Set the user ID from the response
 				});
 
-				document.location.replace('/dashboard');
+				// document.location.replace('/dashboard');
 			} else {
 				alert('Login failed. Please check your credentials.');
 			}
@@ -43,7 +43,7 @@ export const LoginProvider = ({ children }) => {
 	// Logout User
 	const logoutUser = async () => {
 		try {
-			const response = await fetch('/api/users/logout', {
+			const response = await fetch('/api/user/logout', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 			});
@@ -61,10 +61,10 @@ export const LoginProvider = ({ children }) => {
 		} catch (error) {
 			console.error('Error during logout:', error);
 		}
-  };
-  const signUpUser = async (username, email, password) => {
+	};
+	const signUpUser = async (username, email, password) => {
 		try {
-			const response = await fetch('/api/users/signup', {
+			const response = await fetch('/api/user/signup', {
 				method: 'POST',
 				body: JSON.stringify({ username, email, password }),
 				headers: { 'Content-Type': 'application/json' },
