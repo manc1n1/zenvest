@@ -4,6 +4,9 @@
 
 [![License](https://img.shields.io/github/license/manc1n1/zenvest.svg?style=for-the-badge)](https://github.com/manc1n1/zenvest/blob/master/LICENSE)
 [![nodejs][node.js]][nodejs-url]
+[![react][react]][react-url]
+[![vitejs][vite]][vite-url]
+[![tailwindcss][tailwindcss]][tailwindcss-url]
 
 </div>
 
@@ -75,3 +78,9 @@ Don't forget to give the project a star! Thanks again!
 
 [node.js]: https://img.shields.io/badge/node.js-333?style=for-the-badge&logo=nodedotjs
 [nodejs-url]: https://nodejs.org/
+[react]: https://img.shields.io/badge/react-333?style=for-the-badge&logo=react
+[react-url]: https://react.dev/
+[vite]: https://img.shields.io/badge/vite-333?style=for-the-badge&logo=vite
+[vite-url]: https://vitejs.dev/
+[tailwindcss]: https://img.shields.io/badge/tailwindcss-333?style=for-the-badge&logo=tailwindcss
+[tailwindcss-url]: https://tailwindcss.com/
