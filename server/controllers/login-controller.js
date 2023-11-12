@@ -23,20 +23,29 @@ module.exports = {
 	},
 
 	async signUp({ body }, res) {
-		const user = await User.create({
-			username: body.username,
-			email: body.email,
-			password: body.password,
-		});
+		try {
+			const userExists = await User.findOne({ email: body.email });
+			if (userExists) {
+				return res.status(400).json({ error: 'Email already exits.' });
+			} else {
+				const user = await User.create({
+					username: body.username,
+					email: body.email,
+					password: body.password,
+				});
 
-		const userInfo = {
-			username: user.username,
-			email: user.email,
-		};
+				const userInfo = {
+					username: user.username,
+					email: user.email,
+				};
 
-		const token = signToken(user);
+				const token = signToken(user);
 
-		res.status(200).json({ token, userInfo });
+				res.status(200).json({ token, userInfo });
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	},
 
 	//logout

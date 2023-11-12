@@ -2,38 +2,67 @@ import React, { useState } from 'react';
 import { useLoginContext } from '../utils/LoginContext';
 
 const SignUp = () => {
-  const { signUpUser } = useLoginContext();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+	const [formState, setFormState] = useState({
+		username: '',
+		email: '',
+		password: '',
+	});
+	const { signUpUser } = useLoginContext();
 
-  const handleSignUp = async () => {
-    await signUpUser( username, email, password);
-  };
+	const handleChange = (event) => {
+		const { name, value } = event.target;
 
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignUp}>Create Account</button>
-    </div>
-  );
+		setFormState({
+			...formState,
+			[name]: value,
+		});
+	};
+
+	const handleFormSubmit = async (event) => {
+		event.preventDefault();
+		// console.log(formState);
+
+		try {
+			const data = await signUpUser(
+				formState.username,
+				formState.email,
+				formState.password,
+			);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+
+	return (
+		<section>
+			<form onSubmit={handleFormSubmit}>
+				<input
+					placeholder="Username"
+					name="username"
+					type="text"
+					value={formState.username}
+					onChange={handleChange}
+				/>
+				<input
+					placeholder="Email"
+					name="email"
+					type="email"
+					value={formState.email}
+					onChange={handleChange}
+				/>
+				<input
+					placeholder="Password"
+					name="password"
+					type="password"
+					value={formState.password}
+					onChange={handleChange}
+				/>
+				<button className="" type="submit">
+					Submit
+				</button>
+			</form>
+		</section>
+	);
 };
 
 export default SignUp;
