@@ -7,34 +7,37 @@ module.exports = {
 			const filter = { name: body.name };
 			const update = {
 				name: body.name,
-				quantity: body.quantity
+				quantity: body.quantity,
 			};
 			const options = {
 				new: true, // Return the updated document
-				upsert: true // Create if no match is found
+				upsert: true, // Create if no match is found
 			};
 
 			// Find an investment with the same name and update it, or create a new one if it doesn't exist
-			const investmentData = await Investment.findOneAndUpdate(filter, update, options);
+			const investmentData = await Investment.findOneAndUpdate(
+				filter,
+				update,
+				options,
+			);
 
 			const portfolioUpdate = {
-				$addToSet: { investment: investmentData._id }
+				$addToSet: { investment: investmentData._id },
 			};
 
 			const portfolio = await Portfolio.findOneAndUpdate(
 				{ name: params.portfolioName },
 
 				portfolioUpdate,
-				{ new: true }
+				{ new: true },
 			);
 
 			res.status(200).json(portfolio);
 		} catch (error) {
-			console.error("Error in createInvestment:", error);
-			res.status(500).send("Error creating/updating investment");
+			console.error('Error in createInvestment:', error);
+			res.status(500).send('Error creating/updating investment');
 		}
 	},
-
 
 	async getInvestmentId({ params }, res) {
 		const investmentData = await Investment.findById(params.id);
@@ -44,15 +47,15 @@ module.exports = {
 
 	async getAllInvestments({ params }, res) {
 		const investments = await Investment.find(params.id);
-		
-		res.status(200).json(investments);
-},
 
-	async deleteInvestment({  params }, res) {
+		res.status(200).json(investments);
+	},
+
+	async deleteInvestmentId({ params }, res) {
 		const portfolio = await Portfolio.findOneAndUpdate(
 			{ name: params.portfolioName },
 			{ $pull: { investment: params.investmentId } },
-			{ new: true }
+			{ new: true },
 		);
 
 		res.status(200).json(portfolio);
@@ -62,7 +65,7 @@ module.exports = {
 		const portfolio = await Portfolio.findOneAndDelete(
 			{ name: params.portfolioName },
 			{ $pull: { investment: params.investmentId } },
-			{ new: true }
+			{ new: true },
 		);
 
 		res.status(200).json(portfolio);
