@@ -10,20 +10,10 @@ import Pillars from '../components/Pillars';
 
 const Home = () => {
 	return (
-		<section className="w-full max-w-xs p-5 sm:p-0 mx-auto">
-			<div className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg">
-				<div className="text-white text-opacity-60 font-bold">
-					<div className="card-header text-center">
-						<Mission />
-					</div>
-					<div className="card-header text-center">
-						<Pillars />
-					</div>
-					<div className="card-header text-center">
-						<Team />
-					</div>
-				</div>
-			</div>
+		<section className="w-full max-w-xl p-5 sm:p-0 mx-auto text-white text-opacity-60">
+			<Mission />
+			<Pillars />
+			<Team />
 		</section>
 	);
 };
