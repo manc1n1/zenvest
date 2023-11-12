@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginContext } from '../utils/LoginContext';
 
 const Login = () => {
@@ -8,7 +8,8 @@ const Login = () => {
 		password: '',
 	});
 	const { loginUser } = useLoginContext();
-
+	const navigate = useNavigate();
+	
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 
@@ -20,10 +21,12 @@ const Login = () => {
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
+		
 		// console.log(formState);
 
 		try {
 			const data = await loginUser(formState.email, formState.password);
+			navigate('/dashboard');
 		} catch (e) {
 			console.error(e);
 		}
