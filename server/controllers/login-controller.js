@@ -3,30 +3,48 @@ const { signToken } = require('../utils/auth');
 
 module.exports = {
 	async login({ body }, res) {
-		const user = await User.findOne({
-			email: body.email,
-		});
+		try {
+			const user = await User.findOne({
+				email: body.email,
+			});
 
-		if (!user) {
-			res.status(404).json({ message: '404: User not found.' });
+			if (!user) {
+				return res
+					.status(404)
+					.json({ message: '404: User not found.' });
+			}
+
+			const correctPw = await user.isCorrectPassword(body.password);
+
+			if (!correctPw) {
+				return res.status(401).json({ message: '401: Unauthorized.' });
+			}
+
+			const token = signToken(user);
+
+			res.status(200).json({ token, user });
+		} catch (err) {
+			console.error('Error during user lookup:', err);
+			res.status(500).json({ message: 'Internal Server Error' });
 		}
-
-		const correctPw = await user.isCorrectPassword(body.password);
-
-		if (!correctPw) {
-			res.status(401).json({ message: '401: Unauthorized.' });
-		}
-
-		const token = signToken(user);
-
-		res.status(200).json({ token, user });
 	},
 
 	async signUp({ body }, res) {
 		try {
-			const userExists = await User.findOne({ email: body.email });
-			if (userExists) {
-				return res.status(400).json({ error: 'Email already exits.' });
+			const emailExists = await User.findOne({ email: body.email });
+			const userExists = await User.findOne({ username: body.username });
+			if (userExists && emailExists) {
+				return res
+					.status(400)
+					.json({ message: 'Username & Email already exists.' });
+			} else if (userExists) {
+				return res
+					.status(400)
+					.json({ message: 'Username already exists.' });
+			} else if (emailExists) {
+				return res
+					.status(400)
+					.json({ message: 'Email already exists.' });
 			} else {
 				const user = await User.create({
 					username: body.username,
@@ -44,7 +62,8 @@ module.exports = {
 				res.status(200).json({ token, userInfo });
 			}
 		} catch (err) {
-			console.log(err);
+			console.error('Error during user signup:', err);
+			res.status(500).json({ message: 'Internal Server Error' });
 		}
 	},
 };

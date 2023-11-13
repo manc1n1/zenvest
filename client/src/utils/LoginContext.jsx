@@ -1,4 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Auth from '../utils/auth';
 
 // Initialize new context for logged in
@@ -20,6 +23,32 @@ export const useLoginContext = () => useContext(LoginContext);
 export const LoginProvider = ({ children }) => {
 	const [login, setLogin] = useState(getInitialLoginState);
 
+	const navigate = useNavigate();
+
+	const toastSuccess = (message) =>
+		toast.success(message, {
+			position: 'bottom-right',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
+	const toastError = (message) =>
+		toast.error(message, {
+			position: 'bottom-right',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
 	useEffect(() => {
 		localStorage.setItem('loginState', JSON.stringify(login));
 	}, [login]);
@@ -32,14 +61,22 @@ export const LoginProvider = ({ children }) => {
 				headers: { 'Content-Type': 'application/json' },
 			});
 			if (response.ok) {
+				toastSuccess('Successfully logged in.');
 				const data = await response.json();
 				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
 				});
-			} else {
-				alert('Login failed. Please check your credentials.');
+				navigate('/dashboard');
+			}
+			if (response.status === 401) {
+				const data = await response.json();
+				toastError(data.message);
+			}
+			if (response.status === 404) {
+				const data = await response.json();
+				toastError(data.message);
 			}
 		} catch (err) {
 			console.error('Error during login:', err);
@@ -54,15 +91,18 @@ export const LoginProvider = ({ children }) => {
 				headers: { 'Content-Type': 'application/json' },
 			});
 			if (response.ok) {
+				toastSuccess('Successfully signed up.');
 				const data = await response.json();
 				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
 				});
+				navigate('/dashboard');
 			}
 			if (response.status === 400) {
-				alert('Email already exists.');
+				const data = await response.json();
+				toastError(data.message);
 			}
 		} catch (err) {
 			console.error('Error during sign up:', err);
@@ -70,11 +110,13 @@ export const LoginProvider = ({ children }) => {
 	};
 
 	const logoutUser = async () => {
+		toastSuccess('Successfully logged out.');
 		Auth.logout(localStorage.getItem('id_token'));
 		setLogin({
 			loggedIn: false,
 			userToken: null,
 		});
+		navigate('/');
 	};
 
 	// Provider components expect a value prop to be passed
@@ -84,6 +126,7 @@ export const LoginProvider = ({ children }) => {
 		>
 			{/* Render children passed from props */}
 			{children}
+			<ToastContainer />
 		</LoginContext.Provider>
 	);
 };
