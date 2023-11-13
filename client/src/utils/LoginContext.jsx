@@ -18,7 +18,7 @@ const getInitialLoginState = () => {
 				username: null,
 				email: null,
 				id: null,
-		  };
+		};
 };
 
 // We create a custom hook to provide immediate usage of the login context in other components

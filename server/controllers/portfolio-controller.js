@@ -3,12 +3,15 @@ const { User, Portfolio } = require("../models");
 module.exports = {
     async createPortfolio(req, res) {
         // Assuming the authMiddleware has already run and set req.user
-        if (!req.user || !req.user._id) {
+        console.log(req.body.userId);
+        console.log(req.body);
+
+        if (!req.body.userId || !req.body.userId) {
             return res.status(401).json({ message: "Not authorized" });
         }
 
         try {
-            console.log("User:", req.user);
+            // console.log("User:", req.user);
             console.log("Body:", req.body);
 
             const portfolioData = await Portfolio.create({
@@ -17,7 +20,7 @@ module.exports = {
             });
 
             await User.findByIdAndUpdate(
-                req.user._id, // Use _id from req.user
+                req.body.userId, // Use _id from req.user
                 { $push: { portfolio: portfolioData._id } },
                 { new: true }
             );
