@@ -13,6 +13,13 @@ const SignUp = () => {
 		password: '',
 	});
 
+	const handleKeyPress = (e) => {
+		// Check if the pressed key is a space
+		if (e.key === ' ') {
+			e.preventDefault();
+		}
+	};
+
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormState({
@@ -99,6 +106,7 @@ const SignUp = () => {
 						required
 						minLength="8"
 						onChange={handleChange}
+						onKeyDown={handleKeyPress}
 					/>
 				</div>
 				<div className="flex items-center justify-between text-sm sm:text-base">
