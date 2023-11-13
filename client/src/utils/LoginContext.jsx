@@ -104,6 +104,10 @@ export const LoginProvider = ({ children }) => {
 				const data = await response.json();
 				toastError(data.message);
 			}
+			if (response.status === 500) {
+				const data = await response.json();
+				toastError(data.message);
+			}
 		} catch (err) {
 			console.error('Error during sign up:', err);
 		}
@@ -126,7 +130,7 @@ export const LoginProvider = ({ children }) => {
 		>
 			{/* Render children passed from props */}
 			{children}
-			<ToastContainer />
+			<ToastContainer limit={3} />
 		</LoginContext.Provider>
 	);
 };

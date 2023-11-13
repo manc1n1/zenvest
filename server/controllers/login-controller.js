@@ -63,7 +63,7 @@ module.exports = {
 			}
 		} catch (err) {
 			console.error('Error during user signup:', err);
-			res.status(500).json({ message: 'Internal Server Error' });
+			return res.status(500).json({ message: `${err}` });
 		}
 	},
 };
