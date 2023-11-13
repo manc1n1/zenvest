@@ -25,8 +25,9 @@ export const LoginProvider = ({ children }) => {
 
 	const navigate = useNavigate();
 
-	const toastSuccess = (message) =>
+	const toastSuccess = (message, icon) =>
 		toast.success(message, {
+			icon: icon,
 			position: 'bottom-right',
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -61,8 +62,8 @@ export const LoginProvider = ({ children }) => {
 				headers: { 'Content-Type': 'application/json' },
 			});
 			if (response.ok) {
-				toastSuccess('Successfully logged in.');
 				const data = await response.json();
+				toastSuccess(`Welcome, ${data.user.username}!`, '👋');
 				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
@@ -114,7 +115,7 @@ export const LoginProvider = ({ children }) => {
 	};
 
 	const logoutUser = async () => {
-		toastSuccess('Successfully logged out.');
+		toastSuccess('Goodbye!', '✌️');
 		Auth.logout(localStorage.getItem('id_token'));
 		setLogin({
 			loggedIn: false,
@@ -130,7 +131,7 @@ export const LoginProvider = ({ children }) => {
 		>
 			{/* Render children passed from props */}
 			{children}
-			<ToastContainer limit={3} />
+			<ToastContainer className="font-bold" limit={3} />
 		</LoginContext.Provider>
 	);
 };
