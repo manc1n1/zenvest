@@ -7,8 +7,6 @@ const Dashboard = () => {
 
 	const navigate = useNavigate();
 
-	console.log(localUser);
-
 	useEffect(() => {
 		if (!login.loggedIn) {
 			navigate('/login');
