@@ -7,6 +7,10 @@ const Dashboard = () => {
 
 	const navigate = useNavigate();
 
+	// const localUser = JSON.parse(localStorage.getItem('loginState'));
+
+	// console.log(localUser);
+
 	useEffect(() => {
 		if (!login.loggedIn) {
 			navigate('/login');

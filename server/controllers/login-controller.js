@@ -53,6 +53,7 @@ module.exports = {
 				});
 
 				const userInfo = {
+					id: user._id,
 					username: user.username,
 					email: user.email,
 				};
