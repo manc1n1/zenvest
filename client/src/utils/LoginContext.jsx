@@ -104,13 +104,14 @@ export const LoginProvider = ({ children }) => {
 			if (response.ok) {
 				toastSuccess('Successfully signed up.');
 				const data = await response.json();
+				console.log(data);
 				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
-					username: data.user.username,
-					email: data.user.email,
-					id: data.user._id,
+					username: data.userInfo.username,
+					email: data.userInfo.email,
+					id: data.userInfo.id,
 				});
 				navigate('/dashboard');
 			}
