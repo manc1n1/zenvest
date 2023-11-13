@@ -41,7 +41,7 @@ const Login = () => {
 				className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4"
 				onSubmit={handleFormSubmit}
 			>
-				<div className="mb-4 text-sm sm:text-base">
+				<div className="mb-4 text-base sm:text-lg">
 					<label
 						className="block font-bold mb-2 text-white text-opacity-60"
 						htmlFor="email"
@@ -59,7 +59,7 @@ const Login = () => {
 						onChange={handleChange}
 					/>
 				</div>
-				<div className="mb-4 text-sm sm:text-base">
+				<div className="mb-4 text-base sm:text-lg">
 					<label
 						className="block font-bold mb-2 text-white text-opacity-60"
 						htmlFor="password"
@@ -78,7 +78,7 @@ const Login = () => {
 						onChange={handleChange}
 					/>
 				</div>
-				<div className="flex items-center justify-between text-sm sm:text-base">
+				<div className="flex items-center justify-between text-base sm:text-lg">
 					<button
 						className="text-white transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
 						type="submit"
