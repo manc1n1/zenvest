@@ -15,7 +15,7 @@ function Team() {
 					<img
 						className="mx-auto w-12 sm:w-20"
 						src={person1}
-						alt="invest"
+						alt=""
 					/>
 				</div>
 				<div>
@@ -23,7 +23,7 @@ function Team() {
 					<img
 						className="mx-auto w-12 sm:w-20"
 						src={person2}
-						alt="learn"
+						alt=""
 					/>
 				</div>
 				<div>
@@ -31,7 +31,7 @@ function Team() {
 					<img
 						className="mx-auto w-12 sm:w-20"
 						src={person1}
-						alt="organize"
+						alt=""
 					/>
 				</div>
 				<div>
@@ -39,7 +39,7 @@ function Team() {
 					<img
 						className="mx-auto w-12 sm:w-20"
 						src={person2}
-						alt="organize"
+						alt=""
 					/>
 				</div>
 			</div>
