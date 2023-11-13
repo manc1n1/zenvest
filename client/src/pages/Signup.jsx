@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginContext } from '../utils/LoginContext';
 
 const SignUp = () => {
+	const { login, signUpUser } = useLoginContext();
+
+	const navigate = useNavigate();
+
 	const [formState, setFormState] = useState({
 		username: '',
 		email: '',
 		password: '',
 	});
-	const { signUpUser } = useLoginContext();
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
-
 		setFormState({
 			...formState,
 			[name]: value,
@@ -21,8 +23,6 @@ const SignUp = () => {
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
-		// console.log(formState);
-
 		try {
 			const data = await signUpUser(
 				formState.username,
@@ -33,6 +33,12 @@ const SignUp = () => {
 			console.error(e);
 		}
 	};
+
+	useEffect(() => {
+		if (login.loggedIn) {
+			navigate('/');
+		}
+	}, []);
 
 	return (
 		<section className="w-full max-w-xs p-5 sm:p-0 mx-auto">
@@ -71,7 +77,6 @@ const SignUp = () => {
 						name="email"
 						id="email"
 						type="email"
-						pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}"
 						value={formState.email}
 						required
 						onChange={handleChange}
