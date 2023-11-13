@@ -1,21 +1,21 @@
 export const login = async (userData) => {
 	try {
 		const response = await fetch('/api/user/login', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(userData),
-	});
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(userData),
+		});
 		if (!response.ok) {
-            throw new Error('Network response was not ok');
+			throw new Error('Network response was not ok');
 		}
 		return await response.json();
 	} catch (error) {
 		console.error('Error in login:', error);
 		throw error;
-	};
-}
+	}
+};
 
 export const signUp = async (userData) => {
 	try {
@@ -33,8 +33,8 @@ export const signUp = async (userData) => {
 	} catch (error) {
 		console.error('Error in login:', error);
 		throw error;
-	};
-}
+	}
+};
 
 export const createInvestment = async (investmentData, token) => {
 	try {
@@ -53,25 +53,25 @@ export const createInvestment = async (investmentData, token) => {
 	} catch (error) {
 		console.error('Error in create investment:', error);
 		throw error;
-	};
-}
-export const createPortfolio = async (portfolioName, portfolioType, token ) => {
-	const id_token = localStorage.getItem("id_token");
+	}
+};
+export const createPortfolio = async (portfolioName, portfolioType) => {
 	try {
-		const response = await fetch("/api/portfolio/create", {
-			method: "POST",
+		const response = await fetch('/api/portfolio/create', {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
-				'Authorization': `Bearer ${token}`,
+				Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ portfolioName, portfolioType }),
 		});
 		if (!response.ok) {
-			throw new Error("Network response was not ok");
+			throw new Error('Network response was not ok');
 		}
+		console.log('--------CREATE PORTFOLIO--------');
 		return await response.json();
 	} catch (error) {
 		console.error('Error in create portfolio:', error);
 		throw error;
-	};
+	}
 };

@@ -17,6 +17,7 @@ const getInitialLoginState = () => {
 				userToken: null,
 				username: null,
 				email: null,
+				id: null,
 		  };
 };
 
@@ -76,6 +77,7 @@ export const LoginProvider = ({ children }) => {
 					userToken: data.token,
 					username: data.user.username,
 					email: data.user.email,
+					id: data.user._id,
 				});
 				navigate('/dashboard');
 			}
@@ -108,6 +110,7 @@ export const LoginProvider = ({ children }) => {
 					userToken: data.token,
 					username: data.user.username,
 					email: data.user.email,
+					id: data.user._id,
 				});
 				navigate('/dashboard');
 			}
@@ -132,6 +135,7 @@ export const LoginProvider = ({ children }) => {
 			userToken: null,
 			username: null,
 			email: null,
+			id: null,
 		});
 		navigate('/');
 	};
