@@ -12,7 +12,12 @@ const getInitialLoginState = () => {
 	const storedLoginState = localStorage.getItem('loginState');
 	return storedLoginState
 		? JSON.parse(storedLoginState)
-		: { loggedIn: false, userToken: null };
+		: {
+				loggedIn: false,
+				userToken: null,
+				username: null,
+				email: null,
+		  };
 };
 
 // We create a custom hook to provide immediate usage of the login context in other components
@@ -63,11 +68,14 @@ export const LoginProvider = ({ children }) => {
 			});
 			if (response.ok) {
 				const data = await response.json();
+				console.log(data);
 				toastSuccess(`Welcome, ${data.user.username}!`, '👋');
 				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
+					username: data.user.username,
+					email: data.user.email,
 				});
 				navigate('/dashboard');
 			}
@@ -98,6 +106,8 @@ export const LoginProvider = ({ children }) => {
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
+					username: data.user.username,
+					email: data.user.email,
 				});
 				navigate('/dashboard');
 			}
@@ -120,6 +130,8 @@ export const LoginProvider = ({ children }) => {
 		setLogin({
 			loggedIn: false,
 			userToken: null,
+			username: null,
+			email: null,
 		});
 		navigate('/');
 	};
