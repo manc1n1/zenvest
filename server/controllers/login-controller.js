@@ -47,6 +47,4 @@ module.exports = {
 			console.log(err);
 		}
 	},
-
-	//logout
 };

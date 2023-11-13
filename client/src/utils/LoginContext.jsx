@@ -1,8 +1,16 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import Auth from '../utils/auth';
 
 // Initialize new context for logged in
 const LoginContext = createContext();
+
+// Function to get inital login state from storage
+const getInitialLoginState = () => {
+	const storedLoginState = localStorage.getItem('loginState');
+	return storedLoginState
+		? JSON.parse(storedLoginState)
+		: { loggedIn: false, userToken: null };
+};
 
 // We create a custom hook to provide immediate usage of the login context in other components
 export const useLoginContext = () => useContext(LoginContext);
@@ -10,10 +18,11 @@ export const useLoginContext = () => useContext(LoginContext);
 // LoginProvider component that holds initial state, returns provider component
 // Which pages does the user need to be logged in to gain access to??
 export const LoginProvider = ({ children }) => {
-	const [login, setLogin] = useState({
-		loggedIn: null,
-		userId: '',
-	});
+	const [login, setLogin] = useState(getInitialLoginState);
+
+	useEffect(() => {
+		localStorage.setItem('loginState', JSON.stringify(login));
+	}, [login]);
 
 	const loginUser = async (email, password) => {
 		try {
@@ -22,16 +31,13 @@ export const LoginProvider = ({ children }) => {
 				body: JSON.stringify({ email, password }),
 				headers: { 'Content-Type': 'application/json' },
 			});
-
 			if (response.ok) {
-				const userData = await response.json();
-
+				const data = await response.json();
+				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
-					userId: userData.userId, // Set the user ID from the response
+					userToken: data.token,
 				});
-
-				// navigate('/dashboard');
 			} else {
 				alert('Login failed. Please check your credentials.');
 			}
@@ -47,17 +53,12 @@ export const LoginProvider = ({ children }) => {
 				body: JSON.stringify({ username, email, password }),
 				headers: { 'Content-Type': 'application/json' },
 			});
-
-			const data = await response.json();
-
 			if (response.ok) {
-				console.log(data.token);
-
+				const data = await response.json();
 				Auth.login(data.token);
-
 				setLogin({
 					loggedIn: true,
-					userId: '',
+					userToken: data.token,
 				});
 			}
 			if (response.status === 400) {
@@ -69,25 +70,11 @@ export const LoginProvider = ({ children }) => {
 	};
 
 	const logoutUser = async () => {
-		try {
-			const response = await fetch('/api/user/logout', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-			});
-
-			if (response.ok) {
-				setLogin({
-					loggedIn: false,
-					userId: '',
-				});
-
-				// document.location.replace('/');
-			} else {
-				alert('Logout failed. Please try again.');
-			}
-		} catch (err) {
-			console.error('Error during logout:', err);
-		}
+		Auth.logout(localStorage.getItem('id_token'));
+		setLogin({
+			loggedIn: false,
+			userToken: null,
+		});
 	};
 
 	// Provider components expect a value prop to be passed
