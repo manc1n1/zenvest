@@ -31,6 +31,7 @@ const Profile = () => {
 			[name]: value,
 		});
 	};
+	const userId = JSON.parse(localStorage.getItem('loginState'));
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
@@ -38,6 +39,7 @@ const Profile = () => {
 			const data = await createPortfolio(
 				formState.portfolioName,
 				formState.portfolioType,
+				userId.id,
 			);
 			console.log(data);
 		} catch (e) {
@@ -55,7 +57,7 @@ const Profile = () => {
 		<section className="w-full max-w-xs p-5 sm:p-0 mx-auto">
 			<div className="card bg-white card-rounded w-25">
 				<div className="card-header bg-dark text-center">
-					<h1>My Profile</h1>
+					<h1>{login.username}'s Profile</h1>
 				</div>
 			</div>
 
