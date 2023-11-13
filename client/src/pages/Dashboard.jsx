@@ -7,6 +7,10 @@ const Dashboard = () => {
 
 	const navigate = useNavigate();
 
+	const localUser = JSON.parse(localStorage.getItem('loginState'));
+
+	console.log(localUser);
+
 	useEffect(() => {
 		if (!login.loggedIn) {
 			navigate('/login');
@@ -14,14 +18,13 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<div>
-			<div className="card bg-slate-500 card-rounded w-50"></div>
-			<div>
-				<div className="card-header bg-dark text-center">
-					<h1 className="text-2xl text-pink-950">Welcome User!</h1>
-				</div>
+		<section className="w-full max-w-xl p-5 sm:p-0 mx-auto text-white text-opacity-60">
+			<div className="flex justify-center rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 text-base sm:text-2xl">
+				<h1 className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold">
+					{localUser.username}'s Dashboard
+				</h1>
 			</div>
-		</div>
+		</section>
 	);
 };
 

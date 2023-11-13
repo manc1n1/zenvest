@@ -12,7 +12,12 @@ const getInitialLoginState = () => {
 	const storedLoginState = localStorage.getItem('loginState');
 	return storedLoginState
 		? JSON.parse(storedLoginState)
-		: { loggedIn: false, userToken: null };
+		: {
+				loggedIn: false,
+				userToken: null,
+				username: null,
+				email: null,
+		  };
 };
 
 // We create a custom hook to provide immediate usage of the login context in other components
@@ -25,8 +30,9 @@ export const LoginProvider = ({ children }) => {
 
 	const navigate = useNavigate();
 
-	const toastSuccess = (message) =>
+	const toastSuccess = (message, icon) =>
 		toast.success(message, {
+			icon: icon,
 			position: 'bottom-right',
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -61,12 +67,15 @@ export const LoginProvider = ({ children }) => {
 				headers: { 'Content-Type': 'application/json' },
 			});
 			if (response.ok) {
-				toastSuccess('Successfully logged in.');
 				const data = await response.json();
+				console.log(data);
+				toastSuccess(`Welcome, ${data.user.username}!`, '👋');
 				Auth.login(data.token);
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
+					username: data.user.username,
+					email: data.user.email,
 				});
 				navigate('/dashboard');
 			}
@@ -97,10 +106,16 @@ export const LoginProvider = ({ children }) => {
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
+					username: data.user.username,
+					email: data.user.email,
 				});
 				navigate('/dashboard');
 			}
 			if (response.status === 400) {
+				const data = await response.json();
+				toastError(data.message);
+			}
+			if (response.status === 500) {
 				const data = await response.json();
 				toastError(data.message);
 			}
@@ -110,11 +125,13 @@ export const LoginProvider = ({ children }) => {
 	};
 
 	const logoutUser = async () => {
-		toastSuccess('Successfully logged out.');
+		toastSuccess('Goodbye!', '✌️');
 		Auth.logout(localStorage.getItem('id_token'));
 		setLogin({
 			loggedIn: false,
 			userToken: null,
+			username: null,
+			email: null,
 		});
 		navigate('/');
 	};
@@ -126,7 +143,7 @@ export const LoginProvider = ({ children }) => {
 		>
 			{/* Render children passed from props */}
 			{children}
-			<ToastContainer />
+			<ToastContainer className="font-bold" limit={3} />
 		</LoginContext.Provider>
 	);
 };
