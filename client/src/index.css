@@ -10,4 +10,10 @@ body {
 	background-image: url('./assets/images/background.jpeg');
 	background-size: fill;
 	background-color: #b4befe;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+	display: none;
 }
