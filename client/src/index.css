@@ -8,6 +8,6 @@
 
 body {
 	background-image: url('./assets/images/background.jpeg');
-	background-size: cover;
+	background-size: fill;
 	background-color: #b4befe;
 }
