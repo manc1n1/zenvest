@@ -38,7 +38,7 @@ const Login = () => {
 	return (
 		<section className="w-full max-w-xs p-5 sm:p-0 mx-auto">
 			<form
-				className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4"
+				className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 shadow-2xl"
 				onSubmit={handleFormSubmit}
 			>
 				<div className="mb-4 text-base sm:text-lg">

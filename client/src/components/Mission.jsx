@@ -1,6 +1,6 @@
 function Mission() {
 	return (
-		<section className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4">
+		<section className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 shadow-2xl">
 			<div className="grid text-xl sm:text-2xl">
 				<p>
 					Welcome to{' '}
