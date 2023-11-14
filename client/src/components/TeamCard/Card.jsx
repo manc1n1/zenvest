@@ -6,8 +6,10 @@ function Card(img, name, position, key) {
 				src={img}
 				alt={`${img}`}
 			/>
-			<h1 className="whitespace-nowrap text-lg mt-3">{name}</h1>
-			<span className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold text-sm">
+			<h1 className="whitespace-nowrap text-sm sm:text-lg mt-3 font-bold">
+				{name}
+			</h1>
+			<span className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold whitespace-nowrap text-xs sm:text-sm">
 				{position}
 			</span>
 		</div>

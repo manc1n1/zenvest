@@ -41,7 +41,7 @@ function Team() {
 	};
 
 	return (
-		<section className="h-full w-full bg-white bg-opacity-10 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 shadow-2xl">
+		<section className="h-full w-full bg-white bg-opacity-10 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-2 sm:px-8 pt-3 pb-3 mb-4 shadow-2xl">
 			<div className="flex justify-center text-xl sm:text-2xl mb-4">
 				<h1 className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold sm:text-2xl">
 					MEET OUR TEAM
