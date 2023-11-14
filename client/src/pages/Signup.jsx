@@ -48,7 +48,7 @@ const SignUp = () => {
 	}, []);
 
 	return (
-		<section className="w-full max-w-xs p-3 sm:p-0 mx-auto">
+		<section className="w-full max-w-xs mx-auto">
 			<form
 				className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 shadow-2xl"
 				onSubmit={handleFormSubmit}
@@ -109,7 +109,7 @@ const SignUp = () => {
 						onKeyDown={handleKeyPress}
 					/>
 				</div>
-				<div className="flex items-center justify-between text-base sm:text-lg">
+				<div className="flex items-center justify-between text-sm sm:text-base">
 					<button
 						className="text-white transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
 						type="submit"
