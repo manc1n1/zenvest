@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLoginContext } from '../utils/LoginContext';
 import { createPortfolio } from '../utils/api';
+import Portfolio from '../components/Portfolio';
 
 const Dashboard = () => {
 	const { login } = useLoginContext();
@@ -70,54 +71,7 @@ const Dashboard = () => {
 					{capUsername}'s Dashboard
 				</h1>
 			</div>
-			<div className="max-w-xl rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 shadow-2xl mx-auto">
-				<form onSubmit={handleFormSubmit}>
-					<div className="mb-4 text-base sm:text-lg">
-						<label
-							className="block font-bold mb-2 text-white text-opacity-60"
-							htmlFor="portfolioName"
-						>
-							Portfolio Name
-						</label>
-						<input
-							className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none"
-							placeholder="Name"
-							name="portfolioName"
-							id="portfolioName"
-							type="text"
-							value={formState.portfolioName}
-							required
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="mb-4 text-base sm:text-lg">
-						<label
-							className="block font-bold mb-2 text-white text-opacity-60"
-							htmlFor="portfolioType"
-						>
-							Portfolio Type
-						</label>
-						<input
-							className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none"
-							placeholder="Type"
-							name="portfolioType"
-							id="portfolioType"
-							type="text"
-							value={formState.portfolioType}
-							required
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="flex items-center justify-between text-base sm:text-lg">
-						<button
-							className="text-white transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
-							type="submit"
-						>
-							Create Portfolio
-						</button>
-					</div>
-				</form>
-			</div>
+			<Portfolio />
 			<ToastContainer className="font-bold" limit={3} />
 		</section>
 	);

@@ -3,9 +3,11 @@ import { useLoginContext } from '../utils/LoginContext';
 
 function Portfolio() {
 	return (
-		<div>
-			<h3>My Portfolio:</h3>
-		</div>
+		<section>
+			<div>
+				
+			</div>
+		</section>
 	);
 }
 
