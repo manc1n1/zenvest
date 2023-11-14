@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Mission from '../components/Mission';
 import Team from '../components/Team';
+import Title from '../components/Title';
 import Pillars from '../components/Pillars';
 
 // Uncomment import statements below after building queries and mutations
@@ -10,7 +11,8 @@ import Pillars from '../components/Pillars';
 
 const Home = () => {
 	return (
-		<section className="w-full max-w-xl p-5 sm:p-0 mx-auto text-white text-opacity-60">
+		<section className="w-full max-w-xl p-5 sm:p-0 mx-auto text-black text-opacity-60">
+			<Title />
 			<Mission />
 			<Pillars />
 			<Team />

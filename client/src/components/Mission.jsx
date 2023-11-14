@@ -1,22 +1,8 @@
 function Mission() {
 	return (
-		<section className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4">
-			<div className="grid text-lg sm:text-2xl">
-				<p>
-					Welcome to{' '}
-					<span className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold">
-						ZenVest
-					</span>
-					, where financial empowerment meets the spirit of Generation
-					Z! I'm{' '}
-					<span className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold">
-						Mary Holland Nader
-					</span>
-					, the visionary founder behind this revolutionary platform
-					that is redefining the way our generation thinks about and
-					engages with investment.
-				</p>
-				<br />
+		// <section className="h-full w-full rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4">
+		<section className="bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 shadow-2xl p-8">
+			<div className="grid text-base">
 				<p>
 					At{' '}
 					<span className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold">
@@ -32,9 +18,7 @@ function Mission() {
 				<p>
 					Our mission is simple: to empower young individuals with the
 					knowledge and tools they need to make informed and confident
-					investment decisions. We believe that everyone deserves a
-					chance to build a secure financial future, and that includes
-					YOU!
+					investment decisions.
 				</p>
 			</div>
 		</section>
