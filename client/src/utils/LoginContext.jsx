@@ -18,7 +18,7 @@ const getInitialLoginState = () => {
 				username: null,
 				email: null,
 				id: null,
-		};
+		  };
 };
 
 // We create a custom hook to provide immediate usage of the login context in other components
@@ -102,8 +102,11 @@ export const LoginProvider = ({ children }) => {
 				headers: { 'Content-Type': 'application/json' },
 			});
 			if (response.ok) {
-				toastSuccess('Successfully signed up.');
 				const data = await response.json();
+				toastSuccess(
+					`Welcome to ZenVest, ${data.userInfo.username}!`,
+					'👋',
+				);
 				console.log(data);
 				Auth.login(data.token);
 				setLogin({
