@@ -8,7 +8,8 @@
 
 body {
 	background-image: url('./assets/images/background.jpeg');
-	background-size: fill;
+	background-size: cover;
+	background-position: bottom;
 	background-color: #b4befe;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
