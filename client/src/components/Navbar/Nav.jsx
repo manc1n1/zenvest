@@ -53,7 +53,7 @@ export default function Nav() {
 
 	return (
 		<header
-			className={`sticky w-full shadow-md bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg ${
+			className={`z-50 sticky w-full shadow-md bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg ${
 				visible ? 'top-0' : ''
 			}`}
 		>
