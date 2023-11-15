@@ -1,8 +1,8 @@
-import Card from './TeamCard/Card';
-import mary from '../assets/images/mary.jpeg';
-import jamie from '../assets/images/jamie.jpeg';
-import simon from '../assets/images/simon.jpeg';
-import breaux from '../assets/images/breaux.jpeg';
+import Card from '../TeamCard/Card';
+import mary from '../../assets/images/mary.jpeg';
+import jamie from '../../assets/images/jamie.jpeg';
+import simon from '../../assets/images/simon.jpeg';
+import breaux from '../../assets/images/breaux.jpeg';
 
 function Team() {
 	const team = [
