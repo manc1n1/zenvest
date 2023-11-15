@@ -1,34 +1,97 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useLoginContext } from '../utils/LoginContext';
 import CreateInvestment from '../components/Investment/CreateInvestment';
-import InvestmentList from '../components/Dashboard/InvestmentList';
+// import InvestmentList from '../components/Dashboard/InvestmentList';
+import { getPortfolioById, getInvestmentById } from '../utils/api';
+import Card from '../components/Investment/Card';
 
 const Portfolio = () => {
-	const { login } = useLoginContext();
+	const { login, setLogin } = useLoginContext();
+	const { id } = useParams();
+	const [name, setName] = useState('');
+	const [type, setType] = useState('');
+	const [investmentIdArr, setInvestmentIdArr] = useState([]);
+	const [investmentData, setInvestmentData] = useState([]);
+	const [errorOccurred, setErrorOccurred] = useState(false);
 
 	const navigate = useNavigate();
 
-	const username = login.username;
-	const firstLetterCap = username.charAt(0).toUpperCase();
-	const remainingLetters = username.slice(1);
-	const capUsername = firstLetterCap + remainingLetters;
+	const nFirstLetterCap = name.charAt(0).toUpperCase();
+	const nRemainingLetters = name.slice(1);
+	const nCapPortfolio = nFirstLetterCap + nRemainingLetters;
+
+	const tFirstLetterCap = type.charAt(0).toUpperCase();
+	const tRemainingLetters = type.slice(1);
+	const tCapPortfolio = tFirstLetterCap + tRemainingLetters;
+
+	// if (investmentData.length > 0) {
+	// 	console.log(investmentData[0].name);
+	// } else {
+	// 	console.log('No investment data');
+	// }
+
+	if (errorOccurred) {
+		navigate('/404');
+	}
+
+	const renderCard = (investment) => {
+		return Card(investment.name, investment.quantity, investment._id);
+	};
 
 	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const data = await getPortfolioById(id);
+				const portfolioName = data.name;
+				setName(portfolioName);
+				const portfolioType = data.type;
+				setType(portfolioType);
+				const updatedInvestmentIdArr = data.investment; // Use the array directly
+
+				setInvestmentIdArr(updatedInvestmentIdArr);
+
+				// Use Promise.all to wait for all investmentData promises to resolve
+				const investmentDataPromises = updatedInvestmentIdArr.map(
+					async (investmentId) => {
+						const investment = await getInvestmentById(
+							investmentId,
+						);
+						return investment;
+					},
+				);
+
+				const updatedInvestmentData = await Promise.all(
+					investmentDataPromises,
+				);
+				setInvestmentData(updatedInvestmentData);
+			} catch (error) {
+				setErrorOccurred(true);
+				console.error('Error fetching data:', error);
+			}
+		};
+
 		if (!login.loggedIn) {
 			navigate('/login');
 		}
+
+		fetchData();
 	}, [login, navigate]);
 
 	return (
-		<section className="w-full p-5 sm:p-0 mx-auto">
+		<section className="w-full mx-auto">
 			<div className="max-w-xs bg-white bg-opacity-10 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg px-8 pt-6 pb-8 mb-4 shadow-lg text-xl sm:text-2xl mx-auto text-center">
 				<h1 className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold">
-					{capUsername}'s Portfolio NAME
+					{nCapPortfolio}
+				</h1>
+				<h1 className="text-white text-opacity-60 text-base sm:text-lg font-bold">
+					{tCapPortfolio}
 				</h1>
 			</div>
-			<InvestmentList />
 			<CreateInvestment />
+			<div className="grid grid-cols-2 max-w-sm bg-white bg-opacity-10 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg pb-8 mb-4 shadow-2xl mx-auto">
+				{investmentData.map((investment) => renderCard(investment))}
+			</div>
 		</section>
 	);
 };

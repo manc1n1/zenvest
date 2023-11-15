@@ -52,6 +52,7 @@ function CreatePortfolio() {
 				username: login.username,
 				email: login.email,
 				portfolio: newPortfolioArr,
+				investment: [],
 			});
 		} catch (e) {
 			console.error(e);

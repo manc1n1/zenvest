@@ -32,12 +32,15 @@ module.exports = {
 	},
 
 	async getPortfolioById({ params }, res) {
-		const portfolioData = await Portfolio.findById(params.id);
-
-		res.status(200).json(portfolioData);
+		try {
+			const portfolioData = await Portfolio.findById(params.id);
+			res.status(200).json(portfolioData);
+		} catch (err) {
+			res.status(500).json(err);
+		}
 	},
 
-	async getAllPortfoliosByUserId(req, res) {
+	async getAllPortfolios(req, res) {
 		const { userId } = req.params;
 
 		try {
