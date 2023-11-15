@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createInvestment } from '../../utils/api';
 import { useLoginContext } from '../../utils/LoginContext';
 
 function CreateInvestment() {
 	const { login, setLogin } = useLoginContext();
+	const { id } = useParams();
 
-	let investmentArr = login.portfolio;
+	let investmentArr = login.investment;
 
 	const toastSuccess = (message, icon) =>
 		toast.success(message, {
@@ -45,15 +47,14 @@ function CreateInvestment() {
 			[name]: value,
 		});
 	};
-	const portfolioId = JSON.parse(localStorage.getItem('loginState'));
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			const data = await createInvestment(
-				formState.investmentName,
+				formState.investmentName.toUpperCase(),
 				formState.investmentQuantity,
-				portfolioId.id,
+				id,
 			);
 			toastSuccess(
 				`Successfully added ${formState.investmentName}`,
@@ -61,7 +62,6 @@ function CreateInvestment() {
 			);
 			setFormState({ investmentName: '', investmentQuantity: '' });
 			const newInvestmentArr = [...investmentArr, data._id];
-			console.log(data);
 			setLogin({
 				loggedIn: true,
 				userToken: login.loggedIn,
@@ -114,7 +114,7 @@ function CreateInvestment() {
 						name="investmentQuantity"
 						id="investmentQuantity"
 						type="text"
-						value={formState.portfolioQuantity}
+						value={formState.investmentQuantity}
 						required
 						onChange={handleChange}
 					/>
