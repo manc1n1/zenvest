@@ -4,6 +4,7 @@ import { useLoginContext } from '../utils/LoginContext';
 import CreatePortfolio from '../components/Portfolio/CreatePortfolio';
 import InvestmentList from '../components/Dashboard/InvestmentList';
 import GetPortfolio from '../components/Portfolio/GetPortfolio';
+import CreateInvestment from '../components/Investment/CreateInvestment';
 
 const Dashboard = () => {
 	const { login } = useLoginContext();
@@ -31,6 +32,7 @@ const Dashboard = () => {
 			<CreatePortfolio />
 			{login.portfolio.length > 0 && <GetPortfolio />}
 			<InvestmentList />
+			<CreateInvestment/>
 		</section>
 	);
 };

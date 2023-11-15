@@ -1,13 +1,17 @@
 const { Portfolio, Investment } = require('../models');
 
 module.exports = {
-	async createInvestment({ body }, res) {
+	async createInvestment(req, res) {
+		console.log(req.body.userId);
+        console.log(req.body);
 		// https://stackoverflow.com/questions/16002659/how-to-query-nested-objects
 		try {
-			const filter = { name: body.name };
+			console.log("Body:", req.body);
+
+			const filter = { name: req.body.investmentName };
 			const update = {
-				name: body.name,
-				quantity: body.quantity,
+				name: req.body.investmentName,
+				quantity: req.body.investmentQuantity,
 			};
 			const options = {
 				new: true, // Return the updated document
@@ -26,7 +30,7 @@ module.exports = {
 			};
 
 			const portfolio = await Portfolio.findOneAndUpdate(
-				{ name: params.portfolioName },
+				{ name: req.body.investmentName },
 
 				portfolioUpdate,
 				{ new: true },

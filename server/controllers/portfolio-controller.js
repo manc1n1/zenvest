@@ -2,7 +2,6 @@ const { User, Portfolio } = require('../models');
 
 module.exports = {
 	async createPortfolio(req, res) {
-		// Assuming the authMiddleware has already run and set req.user
 		console.log(req.body.userId);
 		console.log(req.body);
 
