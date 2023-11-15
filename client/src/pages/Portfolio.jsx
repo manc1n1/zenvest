@@ -140,7 +140,7 @@ const Portfolio = () => {
 		}
 
 		fetchData();
-	}, [login, navigate, id]);
+	}, [login, navigate, id, investmentData.length, errorOccurred]);
 
 	return (
 		<section className="w-full mx-auto">
