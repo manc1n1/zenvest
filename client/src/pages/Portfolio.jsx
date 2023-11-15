@@ -6,6 +6,8 @@ import CreateInvestment from '../components/Investment/CreateInvestment';
 import { getPortfolioById, getInvestmentById } from '../utils/api';
 import Card from '../components/Investment/Card';
 
+import axios from 'axios';
+
 const Portfolio = () => {
 	const { login, setLogin } = useLoginContext();
 	const { id } = useParams();
@@ -31,12 +33,19 @@ const Portfolio = () => {
 	// 	console.log('No investment data');
 	// }
 
+	console.log(investmentData);
+
 	if (errorOccurred) {
 		navigate('/404');
 	}
 
 	const renderCard = (investment) => {
-		return Card(investment.name, investment.quantity, investment._id);
+		return Card(
+			investment.name,
+			investment.quantity,
+			investment.price,
+			investment._id,
+		);
 	};
 
 	useEffect(() => {
@@ -47,11 +56,10 @@ const Portfolio = () => {
 				setName(portfolioName);
 				const portfolioType = data.type;
 				setType(portfolioType);
-				const updatedInvestmentIdArr = data.investment; // Use the array directly
+				const updatedInvestmentIdArr = data.investment;
 
 				setInvestmentIdArr(updatedInvestmentIdArr);
 
-				// Use Promise.all to wait for all investmentData promises to resolve
 				const investmentDataPromises = updatedInvestmentIdArr.map(
 					async (investmentId) => {
 						const investment = await getInvestmentById(
@@ -64,7 +72,41 @@ const Portfolio = () => {
 				const updatedInvestmentData = await Promise.all(
 					investmentDataPromises,
 				);
-				setInvestmentData(updatedInvestmentData);
+
+				const updatedInvestmentDataWithStock = await Promise.all(
+					updatedInvestmentData.map(async (investment, index) => {
+						try {
+							const response = await axios.get(
+								`http://api.marketstack.com/v1/tickers/${investment.name}/eod?access_key=abf0a31c39501b8717dd220f29c3a33a`,
+							);
+							const apiResponse = response.data;
+							const price = apiResponse.data.eod[0].close;
+
+							// Add stockData to the investment object
+							const investmentWithStock = {
+								...investment,
+								price,
+							};
+
+							// Introduce a delay before making the next API call
+							const delay = index * 2000; // Adjust the delay time as needed (in milliseconds)
+							await new Promise((resolve) =>
+								setTimeout(resolve, delay),
+							);
+
+							return investmentWithStock;
+						} catch (error) {
+							console.log(error);
+							return investment; // Return the original investment if there's an error fetching stock data
+						}
+					}),
+				);
+
+				setInvestmentData(updatedInvestmentDataWithStock);
+
+				if (errorOccurred) {
+					navigate('/404');
+				}
 			} catch (error) {
 				setErrorOccurred(true);
 				console.error('Error fetching data:', error);
