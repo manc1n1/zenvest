@@ -35,7 +35,7 @@ function GetPortfolio() {
 
 	return (
 		<section className="w-full max-w-xl mx-auto">
-			<div className="grid grid-cols-3 max-w-sm bg-white bg-opacity-10 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg pb-8 mb-4 shadow-2xl mx-auto">
+			<div className="grid grid-cols-2 max-w-sm bg-white bg-opacity-10 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg pb-8 mb-4 shadow-2xl mx-auto">
 				{portfolioArr.map((portfolio) => renderCard(portfolio))}
 			</div>
 		</section>
