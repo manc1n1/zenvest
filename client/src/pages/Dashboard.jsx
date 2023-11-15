@@ -29,7 +29,7 @@ const Dashboard = () => {
 				</h1>
 			</div>
 			<CreatePortfolio />
-			<GetPortfolio />
+			{login.portfolio.length > 0 && <GetPortfolio />}
 			<InvestmentList />
 		</section>
 	);
