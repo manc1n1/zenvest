@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginContext } from '../utils/LoginContext';
 import CreatePortfolio from '../components/Portfolio/CreatePortfolio';
+import InvestmentList from '../components/Dashboard/InvestmentList';
 
 const Dashboard = () => {
 	const { login } = useLoginContext();
@@ -27,6 +28,7 @@ const Dashboard = () => {
 				</h1>
 			</div>
 			<CreatePortfolio />
+			<InvestmentList />
 		</section>
 	);
 };
