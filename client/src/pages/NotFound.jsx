@@ -17,7 +17,7 @@ function NotFound() {
 							</h1>
 						</div>
 						<img
-							className="rounded-3xl mb-4"
+							className="mx-auto rounded-3xl mb-4 shadow-2xl w-72 sm:w-96"
 							src={charlie404}
 							alt="404"
 						/>
