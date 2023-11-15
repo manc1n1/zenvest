@@ -58,7 +58,6 @@ export const createInvestment = async (investmentData, token) => {
 
 export const createPortfolio = async (portfolioName, portfolioType, userId) => {
 	try {
-		console.log('Making Create Portfolio Request');
 		const response = await fetch('/api/portfolio/create', {
 			method: 'POST',
 			headers: {
@@ -70,7 +69,6 @@ export const createPortfolio = async (portfolioName, portfolioType, userId) => {
 		if (!response.ok) {
 			throw new Error('Network response was not ok');
 		}
-		console.log('--------CREATE PORTFOLIO--------');
 		return await response.json();
 	} catch (error) {
 		console.error('Error in create portfolio:', error);
@@ -80,7 +78,6 @@ export const createPortfolio = async (portfolioName, portfolioType, userId) => {
 
 export const getPortfolio = async (portfolioId) => {
 	try {
-		console.log('GET Portfolio Request');
 		const response = await fetch(`/api/portfolio/${portfolioId}`, {
 			method: 'GET',
 			headers: {
