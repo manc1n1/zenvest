@@ -2,11 +2,16 @@ const { Portfolio, Investment } = require('../models');
 
 module.exports = {
 	async createInvestment(req, res) {
-		console.log(req.body.userId);
-        console.log(req.body);
+		console.log(req.body.portfolioId);
+		console.log(req.body);
 		// https://stackoverflow.com/questions/16002659/how-to-query-nested-objects
+
+		if (!req.body.portfolioId || !req.body) {
+			return res.status(401).json({ message: 'Not authorized' });
+		}
+
 		try {
-			console.log("Body:", req.body);
+			console.log('Body:', req.body);
 
 			const filter = { name: req.body.investmentName };
 			const update = {
@@ -31,12 +36,17 @@ module.exports = {
 
 			const portfolio = await Portfolio.findOneAndUpdate(
 				{ name: req.body.investmentName },
-
 				portfolioUpdate,
 				{ new: true },
 			);
 
-			res.status(200).json(portfolio);
+			await Portfolio.findByIdAndUpdate(
+				req.body.portfolioId, // Use _id from req.user
+				{ $push: { investment: investmentData._id } },
+				{ new: true },
+			);
+
+			res.status(200).json(investmentData);
 		} catch (error) {
 			console.error('Error in createInvestment:', error);
 			res.status(500).send('Error creating/updating investment');
@@ -49,10 +59,13 @@ module.exports = {
 		res.status(200).json(investmentData);
 	},
 
-	async getAllInvestments({ params }, res) {
-		const investments = await Investment.find(params.id);
-
-		res.status(200).json(investments);
+	async getAllInvestments(req, res) {
+		try {
+			const investmentData = await Investment.find();
+			res.status(200).json(investmentData);
+		} catch (err) {
+			res.status(500).json(err);
+		}
 	},
 
 	async deleteInvestmentId({ params }, res) {

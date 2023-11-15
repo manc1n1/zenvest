@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { createPortfolio } from '../../utils/api';
 import { useLoginContext } from '../../utils/LoginContext';
 
@@ -7,7 +7,6 @@ function CreatePortfolio() {
 	const { login, setLogin } = useLoginContext();
 
 	let portfolioArr = login.portfolio;
-	// console.log(portfolioArr);
 
 	const toastSuccess = (message, icon) =>
 		toast.success(message, {

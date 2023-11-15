@@ -5,7 +5,7 @@ module.exports = {
 		console.log(req.body.userId);
 		console.log(req.body);
 
-		if (!req.body.userId || !req.body.userId) {
+		if (!req.body.userId || !req.body) {
 			return res.status(401).json({ message: 'Not authorized' });
 		}
 
@@ -37,10 +37,16 @@ module.exports = {
 		res.status(200).json(portfolioData);
 	},
 
-	async getAllPortfolios({}, res) {
-		const portfolios = await Portfolio.find({});
+	async getAllPortfoliosByUserId(req, res) {
+		const { userId } = req.params;
 
-		res.status(200).json(portfolios);
+		try {
+			// Assuming Portfolio model has a field named user_id to filter by
+			const portfolioData = await Portfolio.find({ userId });
+			res.status(200).json(portfolioData);
+		} catch (err) {
+			res.status(500).json(err);
+		}
 	},
 
 	async deletePortfolioById({ params }, res) {

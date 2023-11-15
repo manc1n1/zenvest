@@ -19,6 +19,7 @@ const getInitialLoginState = () => {
 				username: null,
 				email: null,
 				portfolio: [],
+				investment: [],
 		  };
 };
 
@@ -70,7 +71,6 @@ export const LoginProvider = ({ children }) => {
 			});
 			if (response.ok) {
 				const data = await response.json();
-				console.log(data);
 				toastSuccess(`Welcome, ${data.user.username}!`, '👋');
 				Auth.login(data.token);
 				setLogin({
@@ -118,6 +118,7 @@ export const LoginProvider = ({ children }) => {
 					username: data.userInfo.username,
 					email: data.userInfo.email,
 					portfolio: [],
+					investment: [],
 				});
 				navigate('/dashboard');
 			}
@@ -144,6 +145,7 @@ export const LoginProvider = ({ children }) => {
 			username: null,
 			email: null,
 			portfolio: [],
+			investment: [],
 		});
 		navigate('/');
 	};

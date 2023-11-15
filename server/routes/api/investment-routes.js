@@ -8,7 +8,7 @@ const {
 	deleteAllInvestment,
 } = require('../../controllers/investment-controller');
 
-router.route('/', authMiddleware).post(createInvestment);
+router.route('/create', authMiddleware).post(createInvestment);
 router.route('/get/:id', authMiddleware).get(getInvestmentId);
 router.route('/get_all', authMiddleware).get(getAllInvestments);
 router.route('/delete/:id', authMiddleware).delete(deleteInvestmentId);
