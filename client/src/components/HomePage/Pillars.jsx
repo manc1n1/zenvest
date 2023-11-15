@@ -1,6 +1,6 @@
-import invest from '../assets/images/invest.svg';
-import learn from '../assets/images/learn.svg';
-import organize from '../assets/images/organize.svg';
+import invest from '../../assets/images/invest.svg';
+import learn from '../../assets/images/learn.svg';
+import organize from '../../assets/images/organize.svg';
 
 function Pillars() {
 	return (

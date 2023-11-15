@@ -4,14 +4,16 @@ import charlie404 from '../assets/images/charlie.png';
 function NotFound() {
 	let location = useLocation();
 	return (
-		<div className="flex justify-center">
-			<div className="card-header bg-dark text-center">
-				<h1>
-					No match for <code>{location.pathname}</code>
-				</h1>
-				<img src={charlie404} alt="404" />
+		<section className="w-full">
+			<div className="flex justify-center">
+				<div className="card-header bg-dark text-center">
+					<h1>
+						No match for <code>{location.pathname}</code>
+					</h1>
+					<img src={charlie404} alt="404" />
+				</div>
 			</div>
-		</div>
+		</section>
 	);
 }
 
