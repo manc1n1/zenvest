@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { createInvestment } from '../../utils/api';
+import { useLoginContext } from '../../utils/LoginContext';
 
-function createInvestment() {
+function CreateInvestment() {
+    const { login, setLogin } = useLoginContext();
+
+    let investmentArr = login.portfolio;
 	const toastSuccess = (message, icon) =>
 		toast.success(message, {
 			icon: icon,
@@ -17,7 +21,7 @@ function createInvestment() {
 		});
 
 	const [formState, setFormState] = useState({
-		investentName: '',
+		investmentName: '',
 		investmentQuantity: '',
 	});
 
@@ -34,12 +38,21 @@ function createInvestment() {
 		event.preventDefault();
 		try {
 			const data = await createInvestment(
-				formState.investentName,
-				formState.investementQuantity,
+				formState.investmentName,
+				formState.investmentQuantity,
 				portfolioId.id,
 			);
 			toastSuccess(`Successfully added ${formState.investmentName}`, '💰');
-			setFormState({ investmentName: '', investmentQuantity: '' });
+            setFormState({ investmentName: '', investmentQuantity: '' });
+            const newInvestmentArr = [...investmentArr, data._id];
+            setLogin({
+                loggedIn: true,
+                userToken: login.loggedIn,
+                id: login.id,
+                username: login.username,
+                email: login.email,
+                investment: newInvestmentArr,
+            });
 			console.log(data);
 		} catch (e) {
 			console.error(e);
@@ -65,7 +78,7 @@ function createInvestment() {
 						name="investmentName"
 						id="investmentName"
 						type="text"
-						value={formState.investentName}
+						value={formState.investmentName}
 						required
 						onChange={handleChange}
 					/>

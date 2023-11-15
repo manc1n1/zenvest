@@ -35,16 +35,16 @@ export const signUp = async (userData) => {
 		throw error;
 	}
 };
-
-export const createInvestment = async (investmentData, token) => {
+//
+export const createInvestment = async (investmentName, investmentQuantity, portfolioId) => {
 	try {
-		const response = await fetch('/api/investment/create', {
+		const response = await fetch('/api/investment', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${localStorage.getItem('id_token')}`,
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(investmentData),
+			body: JSON.stringify({investmentName, investmentQuantity, portfolioId}),
 		});
 		if (!response.ok) {
 			throw new Error('Network response was not ok');
