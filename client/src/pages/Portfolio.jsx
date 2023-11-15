@@ -77,7 +77,7 @@ const Portfolio = () => {
 					updatedInvestmentData.map(async (investment, index) => {
 						try {
 							const response = await axios.get(
-								`http://api.marketstack.com/v1/tickers/${investment.name}/eod?access_key=abf0a31c39501b8717dd220f29c3a33a`,
+								`https://api.marketstack.com/v1/tickers/${investment.name}/eod?access_key=abf0a31c39501b8717dd220f29c3a33a`,
 							);
 							const apiResponse = response.data;
 							const price = apiResponse.data.eod[0].close;
