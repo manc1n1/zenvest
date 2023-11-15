@@ -1,8 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router();
+const { authMiddleware } = require('../../utils/auth');
+const { createPortfolio } = require('../../controllers/portfolio-controller');
 
-const { createPortfolio } = require("../../controllers/portfolio-controller");
-const { authMiddleware } = require("../../utils/auth");
-
-router.route("/create", authMiddleware).post(createPortfolio);
+router.route('/create', authMiddleware).post(createPortfolio);
 
 module.exports = router;
