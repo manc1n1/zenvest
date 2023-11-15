@@ -15,9 +15,10 @@ const getInitialLoginState = () => {
 		: {
 				loggedIn: false,
 				userToken: null,
+				id: null,
 				username: null,
 				email: null,
-				id: null,
+				portfolio: null,
 		  };
 };
 
@@ -75,9 +76,10 @@ export const LoginProvider = ({ children }) => {
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
+					id: data.user._id,
 					username: data.user.username,
 					email: data.user.email,
-					id: data.user._id,
+					portfolio: data.user.portfolio,
 				});
 				navigate('/dashboard');
 			}
@@ -112,9 +114,10 @@ export const LoginProvider = ({ children }) => {
 				setLogin({
 					loggedIn: true,
 					userToken: data.token,
+					id: data.userInfo.id,
 					username: data.userInfo.username,
 					email: data.userInfo.email,
-					id: data.userInfo.id,
+					portfolio: data.user.portfolio,
 				});
 				navigate('/dashboard');
 			}
@@ -137,9 +140,10 @@ export const LoginProvider = ({ children }) => {
 		setLogin({
 			loggedIn: false,
 			userToken: null,
+			id: null,
 			username: null,
 			email: null,
-			id: null,
+			portfolio: null,
 		});
 		navigate('/');
 	};
