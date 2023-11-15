@@ -59,7 +59,7 @@ Project 3 of Columbia Coding Bootcamp
 2. Run `npm run develop`
 
     ```sh
-    npm run develop
+    npm run dev
     ```
 
 3. Go to `http://localhost:3000/` in your browser
