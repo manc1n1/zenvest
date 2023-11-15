@@ -13,7 +13,7 @@ function Card(name, type, total, id, key) {
 							{type}
 						</span>
 						<h1 className="text-white text-opacity-0 bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right text-sm sm:text-xl font-bold">
-							{total ? `$${total}` : '$0'}
+							{total ? `$${total}` : ''}
 						</h1>
 					</div>
 				</div>
