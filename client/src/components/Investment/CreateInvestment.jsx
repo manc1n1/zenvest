@@ -82,7 +82,7 @@ function createInvestment() {
 						placeholder="Quantity"
 						name="investmentQuantity"
 						id="investmentQuantity"
-						type="number"
+						type="text"
 						value={formState.portfolioQuantity}
 						required
 						onChange={handleChange}
