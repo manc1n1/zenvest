@@ -17,7 +17,11 @@
 
 ## Description
 
-Project 3 of Columbia Coding Bootcamp
+Zenvest is a financial platform built for the new generation of side-hustlers, dreamers, and creators. We live in a modern world of investing and personal finance, and Zenvest is here to help GenZ build wealth in this new environment.
+
+This project was created in partnership with the founder Mary Holland Nader, in order for us to get real experience working with a client. With the skills learned in the Columbia Full Stack Developer Bootcamp, we were able to bring her vision to life.
+
+This is a full stack web application powered by Javascript and architectured through the MERN stack (MongoDB, Express.js, React, and Node.js).
 
 ## Table of Contents
 
@@ -26,6 +30,7 @@ Project 3 of Columbia Coding Bootcamp
 -   [Tests](#tests)
 -   [Contributing](#contributing)
 -   [License](#license)
+-   [Credits](#credits)
 -   [Contact](#contact)
 
 ## Installation
@@ -76,6 +81,15 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+## Credits
+
+-   [Marketstack API](https://marketstack.com/documentation)
+-   [Tailwind for React](https://tailwindcss.com/)
+-   [JSON Web Tokens](https://jwt.io/)
+-   [React-Toastify](https://www.npmjs.com/package/react-toastify)
+-   [Mongoose Unique Validator](https://www.npmjs.com/package/mongoose-unique-validator)
+-   [Vite Server](https://vitejs.dev/)
 
 ## License
 
