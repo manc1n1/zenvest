@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { LoginProvider } from './utils/LoginContext';
 import Nav from './components/Navbar/Nav';
 import Footer from './components/Footer/Footer';
-import { LoginProvider } from './utils/LoginContext';
 
 // Uncomment import statement below after building queries and mutations
 // import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
