@@ -16,6 +16,7 @@ const Portfolio = () => {
 	const [investmentIdArr, setInvestmentIdArr] = useState([]);
 	const [investmentData, setInvestmentData] = useState([]);
 	const [errorOccurred, setErrorOccurred] = useState(false);
+	const [total, setTotal] = useState('');
 
 	const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const Portfolio = () => {
 	// 	console.log('No investment data');
 	// }
 
-	console.log(investmentData);
+	// console.log(investmentData);
 
 	if (errorOccurred) {
 		navigate('/404');
@@ -104,6 +105,16 @@ const Portfolio = () => {
 
 				setInvestmentData(updatedInvestmentDataWithStock);
 
+				let networth = 0;
+				for (let i = 0; i < investmentData.length; i++) {
+					const investment = investmentData[i];
+					const totalInvestment =
+						investment.price * investment.quantity;
+					networth += totalInvestment;
+				}
+				setTotal(networth);
+				// console.log(networth);
+
 				if (errorOccurred) {
 					navigate('/404');
 				}
@@ -113,12 +124,23 @@ const Portfolio = () => {
 			}
 		};
 
+		if (investmentData.length > 0) {
+			let networth = 0;
+			for (let i = 0; i < investmentData.length; i++) {
+				const investment = investmentData[i];
+				const totalInvestment = investment.price * investment.quantity;
+				networth += totalInvestment;
+			}
+			localStorage.setItem(`networth-${id}`, JSON.stringify(networth));
+			setTotal(networth);
+		}
+
 		if (!login.loggedIn) {
 			navigate('/login');
 		}
 
 		fetchData();
-	}, [login, navigate]);
+	}, [login, navigate, investmentData, id]);
 
 	return (
 		<section className="w-full mx-auto">
