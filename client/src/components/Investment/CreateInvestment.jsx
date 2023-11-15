@@ -1,15 +1,28 @@
 import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { createInvestment } from '../../utils/api';
 import { useLoginContext } from '../../utils/LoginContext';
 
 function CreateInvestment() {
-    const { login, setLogin } = useLoginContext();
+	const { login, setLogin } = useLoginContext();
 
-    let investmentArr = login.portfolio;
+	let investmentArr = login.portfolio;
+
 	const toastSuccess = (message, icon) =>
 		toast.success(message, {
 			icon: icon,
+			position: 'bottom-right',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
+	const toastError = (message) =>
+		toast.error(message, {
 			position: 'bottom-right',
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -42,19 +55,24 @@ function CreateInvestment() {
 				formState.investmentQuantity,
 				portfolioId.id,
 			);
-			toastSuccess(`Successfully added ${formState.investmentName}`, '💰');
-            setFormState({ investmentName: '', investmentQuantity: '' });
-            const newInvestmentArr = [...investmentArr, data._id];
-            setLogin({
-                loggedIn: true,
-                userToken: login.loggedIn,
-                id: login.id,
-                username: login.username,
-                email: login.email,
-                investment: newInvestmentArr,
-            });
+			toastSuccess(
+				`Successfully added ${formState.investmentName}`,
+				'💰',
+			);
+			setFormState({ investmentName: '', investmentQuantity: '' });
+			const newInvestmentArr = [...investmentArr, data._id];
 			console.log(data);
+			setLogin({
+				loggedIn: true,
+				userToken: login.loggedIn,
+				id: login.id,
+				username: login.username,
+				email: login.email,
+				portfolio: login.portfolio,
+				investment: newInvestmentArr,
+			});
 		} catch (e) {
+			toastError(`Invalid investment.`);
 			console.error(e);
 		}
 	};
