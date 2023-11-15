@@ -1,18 +1,31 @@
 import { useLocation } from 'react-router-dom';
+import { LoginProvider } from '../utils/LoginContext';
+import Nav from '../components/Navbar/Nav';
+import Footer from '../components/Footer/Footer';
 import charlie404 from '../assets/images/charlie.png';
 
 function NotFound() {
 	let location = useLocation();
 	return (
-		<section className="w-full">
-			<div className="flex justify-center">
-				<div className="card-header bg-dark text-center">
-					<h1>
-						No match for <code>{location.pathname}</code>
-					</h1>
-					<img src={charlie404} alt="404" />
+		<section>
+			<LoginProvider>
+				<Nav />
+				<div className="flex items-center justify-center flex-col">
+					<div className="justify-center text-xl sm:text-2xl">
+						<div className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-blue-300 via-pink-500 from-violet-300 bg-size-200 hover:bg-right font-bold text-center">
+							<h1 className="mt-4 mb-4">
+								No match for <code>{location.pathname}</code>
+							</h1>
+						</div>
+						<img
+							className="rounded-3xl mb-4"
+							src={charlie404}
+							alt="404"
+						/>
+					</div>
 				</div>
-			</div>
+				<Footer />
+			</LoginProvider>
 		</section>
 	);
 }
