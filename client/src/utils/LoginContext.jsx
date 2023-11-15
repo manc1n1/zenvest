@@ -80,6 +80,7 @@ export const LoginProvider = ({ children }) => {
 					username: data.user.username,
 					email: data.user.email,
 					portfolio: data.user.portfolio,
+					investment: [],
 				});
 				navigate('/dashboard');
 			}
