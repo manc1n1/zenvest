@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function Card(name, type, id, key) {
+function Card(name, type, total, id, key) {
 	return (
 		<div className="flex flex-col items-center mt-5" key={key}>
 			<Link to={`portfolio/${id}`}>
@@ -12,6 +12,9 @@ function Card(name, type, id, key) {
 						<span className="text-white text-opacity-0 bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right text-sm sm:text-xl font-bold">
 							{type}
 						</span>
+						<h1 className="text-white text-opacity-0 bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right text-sm sm:text-xl font-bold">
+							{total ? `$${total}` : '$0'}
+						</h1>
 					</div>
 				</div>
 			</Link>

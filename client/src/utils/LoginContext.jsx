@@ -139,6 +139,14 @@ export const LoginProvider = ({ children }) => {
 	const logoutUser = async () => {
 		toastSuccess('Goodbye!', '✌️');
 		Auth.logout(localStorage.getItem('id_token'));
+		for (const portfolioId of login.portfolio) {
+			const key = `networth-${portfolioId}`;
+
+			// Check if the key exists before removing
+			if (localStorage.getItem(key)) {
+				localStorage.removeItem(key);
+			}
+		}
 		setLogin({
 			loggedIn: false,
 			userToken: null,

@@ -24,6 +24,7 @@ function GetPortfolio() {
 		return Card(
 			portfolio.name,
 			portfolio.type,
+			localStorage.getItem(`networth-${portfolio._id}`),
 			portfolio._id,
 			portfolio._id,
 		);
