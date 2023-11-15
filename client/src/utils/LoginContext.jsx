@@ -18,7 +18,7 @@ const getInitialLoginState = () => {
 				id: null,
 				username: null,
 				email: null,
-				portfolio: null,
+				portfolio: [],
 		  };
 };
 
@@ -117,7 +117,7 @@ export const LoginProvider = ({ children }) => {
 					id: data.userInfo.id,
 					username: data.userInfo.username,
 					email: data.userInfo.email,
-					portfolio: data.user.portfolio,
+					portfolio: [],
 				});
 				navigate('/dashboard');
 			}
@@ -143,7 +143,7 @@ export const LoginProvider = ({ children }) => {
 			id: null,
 			username: null,
 			email: null,
-			portfolio: null,
+			portfolio: [],
 		});
 		navigate('/');
 	};

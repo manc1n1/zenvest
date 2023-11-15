@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { createPortfolio } from '../../utils/api';
+import { useLoginContext } from '../../utils/LoginContext';
 
 function CreatePortfolio() {
+	const { login, setLogin } = useLoginContext();
+
+	let portfolioArr = login.portfolio;
+	// console.log(portfolioArr);
+
 	const toastSuccess = (message, icon) =>
 		toast.success(message, {
 			icon: icon,
@@ -28,7 +34,6 @@ function CreatePortfolio() {
 			[name]: value,
 		});
 	};
-	const userId = JSON.parse(localStorage.getItem('loginState'));
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
@@ -36,11 +41,19 @@ function CreatePortfolio() {
 			const data = await createPortfolio(
 				formState.portfolioName,
 				formState.portfolioType,
-				userId.id,
+				login.id,
 			);
 			toastSuccess(`Successfully added ${formState.portfolioName}`, '💰');
 			setFormState({ portfolioName: '', portfolioType: '' });
-			console.log(data);
+			const newPortfolioArr = [...portfolioArr, data._id];
+			setLogin({
+				loggedIn: true,
+				userToken: login.loggedIn,
+				id: login.id,
+				username: login.username,
+				email: login.email,
+				portfolio: newPortfolioArr,
+			});
 		} catch (e) {
 			console.error(e);
 		}
