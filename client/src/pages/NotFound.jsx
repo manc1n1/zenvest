@@ -1,13 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import { LoginProvider } from '../utils/LoginContext';
 import Nav from '../components/Navbar/Nav';
-import Footer from '../components/Footer/Footer';
 import charlie404 from '../assets/images/charlie.png';
 
 function NotFound() {
 	let location = useLocation();
 	return (
-		<section>
+		<section className="min-h-screen">
 			<LoginProvider>
 				<Nav />
 				<div className="flex items-center justify-center flex-col">
@@ -24,7 +23,6 @@ function NotFound() {
 						/>
 					</div>
 				</div>
-				<Footer />
 			</LoginProvider>
 		</section>
 	);
