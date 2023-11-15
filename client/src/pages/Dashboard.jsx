@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginContext } from '../utils/LoginContext';
 import CreatePortfolio from '../components/Portfolio/CreatePortfolio';
 import InvestmentList from '../components/Dashboard/InvestmentList';
+import GetPortfolio from '../components/Portfolio/GetPortfolio';
 
 const Dashboard = () => {
 	const { login } = useLoginContext();
@@ -28,6 +29,7 @@ const Dashboard = () => {
 				</h1>
 			</div>
 			<CreatePortfolio />
+			<GetPortfolio />
 			<InvestmentList />
 		</section>
 	);
