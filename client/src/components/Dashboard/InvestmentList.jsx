@@ -43,7 +43,7 @@ function InvestmentList() {
 					</div>
 					{/* <div
 						className="block font-bold mb-2 text-white text-opacity-60"
-						htmlFor="portfolioType"
+
 					>
 						{InvestmentList.map((investment) => investment)}
 					</div> */}

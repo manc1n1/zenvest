@@ -104,7 +104,7 @@ function CreateInvestment() {
 				<div className="mb-4 text-base sm:text-lg">
 					<label
 						className="block font-bold mb-2 text-white text-opacity-60"
-						htmlFor="portfolioType"
+						htmlFor="investmentQuantity"
 					>
 						Investment Quantity
 					</label>
