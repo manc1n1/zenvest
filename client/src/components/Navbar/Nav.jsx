@@ -15,7 +15,7 @@ export default function Nav() {
 	];
 
 	const loggedInLinks = [
-		{ name: 'Profile', route: '/profile' },
+		// { name: 'Profile', route: '/profile' },
 		{ name: 'Dashboard', route: '/dashboard' },
 		{ name: 'Logout', route: '/', onClick: () => logoutUser() },
 	];

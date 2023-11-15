@@ -2,47 +2,35 @@ const { Portfolio, Investment } = require('../models');
 
 module.exports = {
 	async createInvestment(req, res) {
-		console.log(req.body.portfolioId);
-		console.log(req.body);
-		// https://stackoverflow.com/questions/16002659/how-to-query-nested-objects
-
 		if (!req.body.portfolioId || !req.body) {
 			return res.status(401).json({ message: 'Not authorized' });
 		}
 
 		try {
-			console.log('Body:', req.body);
-
 			const filter = { name: req.body.investmentName };
 			const update = {
-				name: req.body.investmentName,
-				quantity: req.body.investmentQuantity,
+				$inc: { quantity: req.body.investmentQuantity }, // Increment the quantity
 			};
 			const options = {
 				new: true, // Return the updated document
 				upsert: true, // Create if no match is found
 			};
 
-			// Find an investment with the same name and update it, or create a new one if it doesn't exist
+			// Find an investment with the same name and update its quantity or create a new one if it doesn't exist
 			const investmentData = await Investment.findOneAndUpdate(
 				filter,
 				update,
 				options,
 			);
 
+			// Update the portfolio using the investment _id
 			const portfolioUpdate = {
 				$addToSet: { investment: investmentData._id },
 			};
 
-			const portfolio = await Portfolio.findOneAndUpdate(
-				{ name: req.body.investmentName },
+			const portfolio = await Portfolio.findByIdAndUpdate(
+				req.body.portfolioId,
 				portfolioUpdate,
-				{ new: true },
-			);
-
-			await Portfolio.findByIdAndUpdate(
-				req.body.portfolioId, // Use _id from req.user
-				{ $push: { investment: investmentData._id } },
 				{ new: true },
 			);
 
@@ -53,15 +41,18 @@ module.exports = {
 		}
 	},
 
-	async getInvestmentId({ params }, res) {
-		const investmentData = await Investment.findById(params.id);
-
-		res.status(200).json(investmentData);
+	async getInvestmentById({ params }, res) {
+		try {
+			const investmentData = await Investment.findById(params.id);
+			res.status(200).json(investmentData);
+		} catch (err) {
+			res.status(500).json(err);
+		}
 	},
 
 	async getAllInvestments(req, res) {
 		try {
-			const investmentData = await Investment.find();
+			const investmentData = await Portfolio.find({});
 			res.status(200).json(investmentData);
 		} catch (err) {
 			res.status(500).json(err);

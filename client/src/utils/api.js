@@ -58,7 +58,7 @@ export const createInvestment = async (
 			throw new Error('Network response was not ok');
 		}
 		const responseData = await response.json();
-		console.log('Raw Response Data:', responseData); // Add this line
+		// console.log('Raw Response Data:', responseData);
 
 		return responseData;
 	} catch (error) {
@@ -67,9 +67,9 @@ export const createInvestment = async (
 	}
 };
 
-export const getAllPortfoliosByUserId = async (userId) => {
+export const getPortfolioById = async (id) => {
 	try {
-		const response = await fetch(`/getAll/${userId}`, {
+		const response = await fetch(`/api/portfolio/${id}`, {
 			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('id_token')}`,
@@ -80,11 +80,33 @@ export const getAllPortfoliosByUserId = async (userId) => {
 			throw new Error('Network response was not ok');
 		}
 		const portfolioData = await response.json();
-		console.log('Raw Response Data:', portfolioData); // Add this line
+		// console.log('Raw Response Data:', portfolioData);
 
 		return portfolioData;
 	} catch (error) {
-		console.error('Error in getAllPortfoliosByUserId:', error);
+		console.error('Error in getPortfolioById:', error);
+		throw error;
+	}
+};
+
+export const getInvestmentById = async (id) => {
+	try {
+		const response = await fetch(`/api/investment/${id}`, {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		if (!response.ok) {
+			throw new Error('Network response was not ok');
+		}
+		const investmentData = await response.json();
+		// console.log('Raw Response Data:', investmentData);
+
+		return investmentData;
+	} catch (error) {
+		console.error('Error in getPortfolioById:', error);
 		throw error;
 	}
 };
@@ -102,7 +124,7 @@ export const getAllInvestments = async () => {
 			throw new Error('Network response was not ok');
 		}
 		const portfolioData = await response.json();
-		console.log('Raw Response Data:', portfolioData); // Add this line
+		console.log('Raw Response Data:', portfolioData);
 
 		return portfolioData;
 	} catch (error) {

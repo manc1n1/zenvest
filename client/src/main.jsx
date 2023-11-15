@@ -39,10 +39,10 @@ const router = createBrowserRouter([
 				path: 'dashboard/portfolio/:id',
 				element: <Portfolio />,
 			},
-			{
-				path: 'profile',
-				element: <Profile />,
-			},
+			// {
+			// 	path: 'profile',
+			// 	element: <Profile />,
+			// },
 		],
 	},
 ]);
