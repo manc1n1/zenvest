@@ -23,7 +23,7 @@ export default function Nav() {
 	const renderLink = (content) => {
 		return (
 			<Link
-				className="bg-clip-text text-transparent transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right"
+				className=""
 				key={content.name}
 				to={content.route}
 				onClick={content.onClick}

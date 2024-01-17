@@ -56,7 +56,7 @@ const SignUp = () => {
 			>
 				<div className="mb-4 text-base sm:text-lg">
 					<label
-						className="block font-bold mb-2 text-white text-opacity-60"
+						className="block font-bold mb-2 text-opacity-60"
 						htmlFor="username"
 					>
 						Username
@@ -74,7 +74,7 @@ const SignUp = () => {
 				</div>
 				<div className="mb-4 text-base sm:text-lg">
 					<label
-						className="block font-bold mb-2 text-white text-opacity-60"
+						className="block font-bold mb-2 text-opacity-60"
 						htmlFor="email"
 					>
 						Email
@@ -92,7 +92,7 @@ const SignUp = () => {
 				</div>
 				<div className="mb-4 text-base sm:text-lg">
 					<label
-						className="block font-bold mb-2 text-white text-opacity-60"
+						className="block font-bold mb-2 text-opacity-60"
 						htmlFor="password"
 					>
 						Password
@@ -112,13 +112,13 @@ const SignUp = () => {
 				</div>
 				<div className="flex items-center justify-between text-sm sm:text-base">
 					<button
-						className="text-white transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
+						className="text-white transition-all duration-500 bg-gradient-to-r to-yellow-500 via-blue-500 from-yellow-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
 						type="submit"
 					>
 						Sign Up
 					</button>
 					<Link
-						className="inline-block align-baseline font-bold text-white text-opacity-60 hover:text-opacity-100"
+						className="inline-block align-baseline font-bold text-opacity-60 hover:text-opacity-100"
 						to="/login"
 					>
 						Already signed up?

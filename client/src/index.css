@@ -1,15 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Spectral:ital,wght@0,200;0,400;1,200&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-	font-family: 'Josefin Slab', serif;
+	font-family: 'Inter', sans-serif;
 }
 
 body {
-	background-image: url('./assets/images/background.jpeg');
+	background-image: url('./assets/images/background2.jpeg');
 	background-size: cover;
 	background-position: bottom;
+	background-attachment: fixed;
 	background-color: #b4befe;
 	-ms-overflow-style: none;
 	scrollbar-width: none;

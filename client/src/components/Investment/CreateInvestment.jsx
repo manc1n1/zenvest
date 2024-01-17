@@ -85,7 +85,7 @@ function CreateInvestment() {
 			>
 				<div className="mb-4 text-base sm:text-lg">
 					<label
-						className="block font-bold mb-2 text-white text-opacity-60"
+						className="block font-bold mb-2 text-opacity-60"
 						htmlFor="investmentName"
 					>
 						Investment Name
@@ -103,7 +103,7 @@ function CreateInvestment() {
 				</div>
 				<div className="mb-4 text-base sm:text-lg">
 					<label
-						className="block font-bold mb-2 text-white text-opacity-60"
+						className="block font-bold mb-2 text-opacity-60"
 						htmlFor="investmentQuantity"
 					>
 						Investment Quantity
@@ -121,7 +121,7 @@ function CreateInvestment() {
 				</div>
 				<div className="flex items-center justify-between text-sm sm:text-base">
 					<button
-						className="text-white transition-all duration-500 bg-gradient-to-r to-violet-500 via-pink-500 from-blue-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
+						className="text-white transition-all duration-500 bg-gradient-to-r to-yellow-500 via-blue-500 from-yellow-500 bg-size-200 hover:bg-right font-bold rounded-lg py-2 px-4"
 						type="submit"
 					>
 						Add Investment
